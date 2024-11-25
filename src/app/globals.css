@@ -1,0 +1,82 @@
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+body {
+  @apply m-0 p-0 bg-neutral-950 text-base leading-[24px];
+}
+
+/* Typography */
+h1 {
+  @apply text-4xl leading-[48px];
+}
+h2 {
+  @apply text-3xl leading-[40px];
+}
+h3 {
+  @apply text-2xl leading-[32px];
+}
+h4 {
+  @apply text-xl leading-[28px];
+}
+h5 {
+  @apply text-lg leading-[26px];
+}
+h6 {
+  @apply text-sm leading-[22px];
+}
+p {
+  @apply text-xs leading-[20px];
+}
+
+/* Layout */
+.page {
+  @apply h-screen w-screen flex items-center justify-center;
+}
+
+/* Components */
+.card {
+  @apply min-w-[356px] px-5 py-5 border border-neutral-800 rounded-lg flex flex-col gap-6;
+}
+
+/* Forms */
+label {
+  @apply text-neutral-50 text-sm leading-[22px];
+}
+
+input {
+  @apply border border-neutral-800 rounded-lg px-3 py-1 bg-neutral-950 text-neutral-500 
+    text-xs min-w-64 transition-all ease-in-out duration-200;
+}
+input:hover {
+  @apply border-neutral-600 text-neutral-300;
+}
+input:active {
+  @apply border-neutral-400 text-neutral-50;
+}
+
+/* Buttons */
+button {
+  @apply px-3 md:px-4 lg:px-8 py-4 h-8 rounded-lg flex flex-row items-center justify-center 
+    transition-all ease-in-out duration-200;
+}
+.button_primary {
+  @apply text-neutral-950 bg-neutral-50;
+}
+.button_primary:hover {
+  @apply text-neutral-950 bg-neutral-200;
+}
+.button_outline {
+  @apply border border-neutral-50 text-neutral-50;
+}
+.button_outline:hover {
+  @apply border border-neutral-300 text-neutral-50;
+}
+.button_link {
+  @apply text-neutral-50;
+}
+.button_link:hover {
+  @apply text-neutral-600;
+}
