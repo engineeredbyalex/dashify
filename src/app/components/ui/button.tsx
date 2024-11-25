@@ -4,6 +4,6 @@ interface ButtonProps {
   style: string;
 }
 
-export default function Button({ content, route, style }: ButtonProps) {
+export default function Button({ content, style }: ButtonProps) {
   return <button className={`${style}`}>{content}</button>;
 }
