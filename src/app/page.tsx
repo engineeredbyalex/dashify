@@ -23,11 +23,8 @@ export default function Home() {
       return <span className="text-neutral-50 text-sm mt-7">Loading...</span>;
     } else {
       return (
-        <Link
-          href="/login"
-          className="border border-solid border-neutral-50 rounded"
-        >
-          Sign In
+        <Link href="/login">
+          <button className="button_primary">Sign In</button>
         </Link>
       );
     }
