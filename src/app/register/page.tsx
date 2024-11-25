@@ -1,74 +1,89 @@
 "use client";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { register } from "../actions/register";
+
 export default function Register() {
   const [error, setError] = useState<string>();
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = async (formData: FormData) => {
-    const r = await register({
-      email: formData.get("email"),
-      password: formData.get("password"),
-      name: formData.get("name"),
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const res = await register({
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
     });
+
     ref.current?.reset();
-    if (r?.error) {
-      setError(r.error);
+
+    if (res?.error) {
+      setError(res.error);
       return;
-    } else {
-      return router.push("/login");
     }
+    router.push("/login");
   };
 
   return (
-    <section className="w-full h-screen flex items-center justify-center">
-      <form
-        ref={ref}
-        action={handleSubmit}
-        className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2 
-        border border-solid border-black bg-white rounded"
-      >
-        {error && <div className="">{error}</div>}
-        <h1 className="mb-5 w-full text-2xl font-bold">Register</h1>
-        <label className="w-full text-sm">Full Name</label>
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded text-[13px]"
-          name="name"
-        />
-        <label className="w-full text-sm">Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-          name="email"
-        />
-        <label className="w-full text-sm">Password</label>
-        <div className="flex w-full">
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-            name="password"
-          />
-        </div>
-        <button
-          className="w-full border border-solid border-black py-1.5 mt-2.5 rounded
-        transition duration-150 ease hover:bg-black"
-        >
-          Sign up
-        </button>
+    <section className="page">
+      <form ref={ref} onSubmit={handleSubmit} className="card">
+        <h4 className="text-neutral-50">Register</h4>
 
-        <Link
-          href="/login"
-          className="text-sm text-[#888] transition duration-150 ease hover:text-black"
-        >
-          Already have an account?
-        </Link>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label htmlFor="name" className="text-sm">
+              Full Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Full Name"
+              name="name"
+              className="input"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="email" className="text-sm">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Email"
+              name="email"
+              className="input"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="password" className="text-sm">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              name="password"
+              className="input"
+            />
+          </div>
+        </div>
+
+        {error && <div className="text-sm text-red-500">{error}</div>}
+
+        <div className="w-full gap-4 flex flex-row items-start justify-end">
+          <Link href="/login">
+            <button className="button_outline">Login</button>
+          </Link>
+          <button type="submit" className="button_primary">
+            Sign up
+          </button>
+        </div>
       </form>
     </section>
   );
