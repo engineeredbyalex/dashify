@@ -1,9 +1,13 @@
+"use client";
 import MediumStats from "./components/ui/stats/MediumStats";
 import SmallStats from "./components/ui/stats/SmallStats";
 import Header from "./components/ui/ui/Header";
 import PageHeader from "./components/ui/ui/PageHeader";
+import useAuth from "./hooks/useAuth";
 
-export default async function Home() {
+function Home() {
+  useAuth(); // Call the custom hook to check authentication
+
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
@@ -20,7 +24,7 @@ export default async function Home() {
             <SmallStats />
             <SmallStats />
           </div>
-          <div className="w-1/3 flex items-ceneter  justify-end">
+          <div className="w-1/3 flex items-center justify-end">
             <MediumStats />
           </div>
         </div>
@@ -28,3 +32,5 @@ export default async function Home() {
     </div>
   );
 }
+
+export default Home;
