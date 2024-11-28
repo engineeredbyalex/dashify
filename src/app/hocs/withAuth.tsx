@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 // Define a generic type for the wrapped component's props
-type WithAuthProps<P = {}> = P & {
+type WithAuthProps<P = unknown> = P & {
   // You can add any additional props here if needed
 };
 
