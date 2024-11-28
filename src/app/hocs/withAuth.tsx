@@ -3,13 +3,15 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-// Define the type for the wrapped component's props
-type WithAuthProps = {
-  [key: string]: any; // You can replace this with a more specific type if known
+// Define a generic type for the wrapped component's props
+type WithAuthProps<P = {}> = P & {
+  // You can add any additional props here if needed
 };
 
-const withAuth = (WrappedComponent: React.ComponentType<WithAuthProps>) => {
-  const AuthenticatedComponent = (props: WithAuthProps) => {
+const withAuth = <P extends WithAuthProps>(
+  WrappedComponent: React.ComponentType<P>
+) => {
+  const AuthenticatedComponent = (props: P) => {
     const { status } = useSession();
     const router = useRouter();
 
@@ -28,7 +30,9 @@ const withAuth = (WrappedComponent: React.ComponentType<WithAuthProps>) => {
   };
 
   // Set a display name for the wrapped component
-  AuthenticatedComponent.displayName = `withAuth(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  AuthenticatedComponent.displayName = `withAuth(${
+    WrappedComponent.displayName || WrappedComponent.name || "Component"
+  })`;
 
   return AuthenticatedComponent;
 };
