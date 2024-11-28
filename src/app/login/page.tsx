@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default async function Login() {
+export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
 

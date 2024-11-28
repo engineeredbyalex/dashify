@@ -26,6 +26,7 @@ export default function CreateProduct() {
       });
       router.push("/products");
     } catch (error) {
+       console.log(error);
       setError("Failed to create product.");
     }
   };
