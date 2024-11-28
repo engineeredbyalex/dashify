@@ -41,6 +41,7 @@ export async function DELETE(req: Request) {
     await Product.findByIdAndDelete(id);
     return NextResponse.json(null, { status: 204 });
   } catch (error) {
+     console.log(error);
     return NextResponse.json(
       { error: "Failed to delete product." },
       { status: 500 }

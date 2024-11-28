@@ -15,14 +15,14 @@ interface Product {
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
 
-  const deleteProduct = async (id: string) => {
-    try {
-      await axios.delete(`/api/products?id=${id}`);
-      setProducts(products.filter((product) => product._id !== id));
-    } catch (error) {
-      console.error("Failed to delete product.");
-    }
-  };
+  // const deleteProduct = async (id: string) => {
+  //   try {
+  //     await axios.delete(`/api/products?id=${id}`);
+  //     setProducts(products.filter((product) => product._id !== id));
+  //   } catch (error) {
+  //     console.error("Failed to delete product.");
+  //   }
+  // };
 
   useEffect(() => {
     const fetchProducts = async () => {
