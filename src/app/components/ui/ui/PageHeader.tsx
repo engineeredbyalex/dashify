@@ -1,10 +1,18 @@
 "use client";
 import Link from "next/link";
 import BreadCrumbs from "./Breadcrumbs";
-// Importing usePathname to get the current path of the page
 import { usePathname } from "next/navigation";
 
-export default function PageHeader({ primaryRoute, primaryText }: any) {
+// Define a type for the props
+interface PageHeaderProps {
+  primaryRoute: string;
+  primaryText: string;
+}
+
+export default function PageHeader({
+  primaryRoute,
+  primaryText,
+}: PageHeaderProps) {
   const pathName = usePathname();
 
   // Function to clean and format the pathName
@@ -19,6 +27,7 @@ export default function PageHeader({ primaryRoute, primaryText }: any) {
         (segment) => segment.charAt(0).toUpperCase() + segment.slice(1) // Capitalize each segment
       );
   };
+
   return (
     <div className="w-full h-auto flex items-center justify-between">
       <div className="text-neutral-50">
