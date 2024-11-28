@@ -33,26 +33,37 @@ p {
 
 /* Animations */
 .animation {
-  @apply transition-all ease-in-out duration-300
+  @apply transition-all ease-in-out duration-300;
 }
+
 /* Layout */
 .page {
-  @apply h-screen w-screen flex items-center justify-center;
+  @apply w-screen h-screen flex items-center justify-center;
 }
 
 /* Components */
 .card {
-  @apply min-w-[356px] px-5 py-5 border border-neutral-800 rounded-lg flex flex-col gap-6;
+  @apply min-w-[356px] px-5 py-5 border border-neutral-800 rounded-lg 
+    flex flex-col gap-6;
+}
+
+.user_card {
+  @apply min-w-32 px-2 py-1 rounded-lg border-[1px] border-neutral-800 
+    text-neutral-50 flex flex-col gap-4 items-center justify-evenly;
+}
+.user_card_toggled {
+  @apply absolute top-full left-0 mt-2 w-full px-2 py-1 bg-neutral-950 
+    rounded-lg border-[1px] border-neutral-800 text-neutral-50 z-50;
 }
 
 /* Forms */
 label {
-  @apply text-neutral-50 text-sm leading-[22px];
+  @apply text-sm leading-[22px] text-neutral-50;
 }
 
 input {
-  @apply border border-neutral-800 rounded-lg px-3 py-1 bg-neutral-950 text-neutral-500 
-    text-xs min-w-64 animation;
+  @apply min-w-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 
+    text-xs leading-[20px] text-neutral-500 animation;
 }
 input:hover {
   @apply border-neutral-600 text-neutral-300;
@@ -63,20 +74,26 @@ input:active {
 
 /* Buttons */
 button {
-  @apply px-3 md:px-4 lg:px-8 py-4 h-8 rounded-lg flex flex-row items-center justify-center 
-    transition-all ease-in-out duration-200;
+  @apply h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg flex flex-row items-center 
+    justify-center transition-all ease-in-out duration-200 text-sm;
 }
 .button_primary {
-  @apply text-neutral-950 bg-neutral-50;
+  @apply text-neutral-950 bg-neutral-50 border-[1px] border-neutral-50;
 }
 .button_primary:hover {
   @apply text-neutral-950 bg-neutral-200;
 }
 .button_outline {
-  @apply border border-neutral-50 text-neutral-50;
+  @apply border-[1px] border-neutral-50 text-neutral-50;
 }
 .button_outline:hover {
-  @apply border border-neutral-300 text-neutral-50;
+  @apply border-[1px] border-neutral-300 text-neutral-50;
+}
+.button_destructive{
+  @apply bg-red-600 border-[1px] border-red-600
+}
+.button_postive{
+  @apply bg-green-600 border-[1px] border-green-600 text-neutral-50 hover:bg-green-700 hover:border-green-700 animation
 }
 .button_link {
   @apply text-neutral-50;
@@ -87,8 +104,20 @@ button {
 
 /* Links */
 .header_link_active {
-  @apply text-neutral-50 hover:text-neutral-600 animation
+  @apply text-neutral-50 hover:text-neutral-600 animation;
 }
 .header_link_inactive {
-  @apply text-neutral-600 hover:text-neutral-50 animation
+  @apply text-neutral-600 hover:text-neutral-50 animation;
+}
+
+/* Stats cards */
+.stat_card_small {
+  @apply w-48 h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
+}
+.stat_card_medium {
+  @apply w-[436px] h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
+}
+/* Product data */
+.product_list{
+  @apply  border-b-[1px] border-neutral-600 pb-2 flex flex-row items-center justify-between text-neutral-50
 }
