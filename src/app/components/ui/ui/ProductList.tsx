@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Button from "./Button";
 
 interface Product {
   _id: string;
@@ -47,7 +48,11 @@ export default function ProductList() {
               <div>Stock : {product.stock} Units</div>
             </div>
           </div>
-          <button className="button_postive">Edit the product</button>
+          <Button
+            route={"/products/edit/" + product._id}
+            text="Edit the product"
+            style="button_postive"
+          />
         </div>
       ))}
     </div>

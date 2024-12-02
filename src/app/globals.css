@@ -71,6 +71,9 @@ input:hover {
 input:active {
   @apply border-neutral-400 text-neutral-50;
 }
+input::file-selector-button{
+  @apply bg-transparent border-none text-sm text-neutral-500
+}
 
 /* Buttons */
 button {
@@ -90,10 +93,16 @@ button {
   @apply border-[1px] border-neutral-300 text-neutral-50;
 }
 .button_destructive{
-  @apply bg-red-600 border-[1px] border-red-600
+  @apply bg-red-600 border-[1px] border-red-600 text-neutral-50 animation
+}
+.button_destructive:hover{
+  @apply bg-red-700 border-[1px] border-red-700 text-neutral-50 animation
 }
 .button_postive{
-  @apply bg-green-600 border-[1px] border-green-600 text-neutral-50 hover:bg-green-700 hover:border-green-700 animation
+  @apply bg-green-600 border-[1px] border-green-600 text-neutral-50 animation
+}
+.button_postive:hover{
+  @apply bg-green-700 border-[1px] border-green-700 text-neutral-50 animation 
 }
 .button_link {
   @apply text-neutral-50;
@@ -115,7 +124,7 @@ button {
   @apply w-48 h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
 }
 .stat_card_medium {
-  @apply w-[436px] h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
+  @apply w-full h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
 }
 /* Product data */
 .product_list{

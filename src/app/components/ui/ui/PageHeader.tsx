@@ -4,15 +4,9 @@ import BreadCrumbs from "./Breadcrumbs";
 import { usePathname } from "next/navigation";
 
 // Define a type for the props
-interface PageHeaderProps {
-  primaryRoute: string;
-  primaryText: string;
-}
 
-export default function PageHeader({
-  primaryRoute,
-  primaryText,
-}: PageHeaderProps) {
+
+export default function PageHeader({ children }: any) {
   const pathName = usePathname();
 
   // Function to clean and format the pathName
@@ -36,12 +30,7 @@ export default function PageHeader({
           <BreadCrumbs />
         </div>
       </div>
-      <div className="gap-2 flex flex-row">
-        <button className="button_outline">Sort</button>
-        <Link href={primaryRoute}>
-          <button className="button_primary">{primaryText}</button>
-        </Link>
-      </div>
+      <div className="gap-2 flex flex-row">{children}</div>
     </div>
   );
 }

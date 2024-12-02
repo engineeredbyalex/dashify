@@ -1,9 +1,9 @@
 import PageHeader from "../components/ui/ui/PageHeader";
 import Header from "../components/ui/ui/Header";
-import ProductList from "../components/ui/ui/ProductList";
 import Button from "../components/ui/ui/Button";
+import OrderList from "../components/ui/ui/OrdersList";
 
-export default function Products() {
+export default function Orders() {
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
@@ -18,7 +18,7 @@ export default function Products() {
           />
         </PageHeader>
         <div className="mt-9">
-          <ProductList />
+          <OrderList />
         </div>
       </div>
     </div>

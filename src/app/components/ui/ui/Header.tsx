@@ -44,8 +44,14 @@ export default function Header() {
       </div>
 
       <div className="gap-4 flex items-center justify-center">
-        <HiChatBubbleOvalLeft className="fill-neutral-600" size={20} />
-        <HiBell className="fill-neutral-600" size={20} />
+        <HiChatBubbleOvalLeft
+          className="fill-neutral-600 hover:fill-neutral-300 animation cursor-pointer"
+          size={20}
+        />
+        <HiBell
+          className="fill-neutral-600 hover:fill-neutral-300 animation cursor-pointer"
+          size={20}
+        />
         <input placeholder="Search for"></input>
       </div>
     </div>
