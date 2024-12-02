@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "testing",
+  apiKey: .env.GOOGLE.API,
   authDomain: "maybee-store.firebaseapp.com",
   projectId: "maybee-store",
   storageBucket: "maybee-store.appspot.com",
