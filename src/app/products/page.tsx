@@ -9,7 +9,11 @@ export default function Products() {
       <Header />
       <div className="px-28 py-9">
         <PageHeader>
-          <Button route="/products" text="Change view" style="button_outline" />
+          <Button
+            route="/products"
+            text="Download data"
+            style="button_outline"
+          />
 
           <Button
             route="products/new"

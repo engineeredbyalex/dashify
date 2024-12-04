@@ -9,13 +9,14 @@ import Header from "./components/ui/ui/Header";
 import PageHeader from "./components/ui/ui/PageHeader";
 import useAuth from "./hooks/useAuth";
 import YearlyOverview from "./components/ui/graphs/YearlyOverview";
+import RecentSales from "./components/ui/stats/RecentSales";
 
 function Home() {
   useAuth();
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
-      <div className="mx-28 py-9 flex flex-col">
+      <div className="mx-14  lg:mx-28 py-9 flex flex-col">
         <PageHeader>
           <Button route="/products" text="Change view" style="button_outline" />
           <Button
@@ -24,20 +25,24 @@ function Home() {
             style="button_primary"
           />
         </PageHeader>
-        <div className="mt-9 gap-16 w-full flex">
-          <div className="gap-3 flex">
+        <div className="mt-9 gap-3 lg:gap-16 w-full flex flex-col">
+          <div className="gap-3 w-full flex flex-col lg:flex-row">
             <RevenueStats />
             <OrderStats />
             <ClientsStats />
-            <UserStats />
             <UserStats />
           </div>
           <div className="w-full flex ">
             <MediumStats />
           </div>
         </div>
-        <div className="w-2/3 flex mt-9">
-          <YearlyOverview />
+        <div className="w-full gap-8 lg:gap-16 flex mt-9 flex-col lg:flex-row">
+          <div className="w-full lg:w-2/3">
+            <YearlyOverview />
+          </div>
+          <div className="w-full lg:w-1/3 h-full">
+            <RecentSales />
+          </div>
         </div>
       </div>
     </div>

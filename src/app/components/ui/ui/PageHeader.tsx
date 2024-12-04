@@ -23,14 +23,14 @@ export default function PageHeader({ children }: any) {
   };
 
   return (
-    <div className="w-full h-auto flex items-center justify-between">
-      <div className="text-neutral-50">
+    <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div className="text-neutral-50 w-full">
         <h1>{getCleanedPathname()}</h1>
         <div>
           <BreadCrumbs />
         </div>
       </div>
-      <div className="gap-2 flex flex-row">{children}</div>
+      <div className="gap-2 flex w-full flex-row">{children}</div>
     </div>
   );
 }

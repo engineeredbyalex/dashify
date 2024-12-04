@@ -121,7 +121,7 @@ button {
 
 /* Stats cards */
 .stat_card_small {
-  @apply w-48 h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
+  @apply w-full lg:w-48 h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
 }
 .stat_card_medium {
   @apply w-full h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg

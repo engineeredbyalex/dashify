@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { HiMiniUserGroup } from "react-icons/hi2";
 
 export default function ClientsStats() {
   const [client, setClient] = useState([]);
@@ -23,6 +24,7 @@ export default function ClientsStats() {
     <div className="stat_card_small">
       <div className="w-full flex flex-row justify-between text-neutral-50">
         <p className="text-neutral-300">Total clients</p>
+        <HiMiniUserGroup size={12} />
       </div>
       <h3 className="text-neutral-50"> {uniqueClientsCount} Clients</h3>
     </div>

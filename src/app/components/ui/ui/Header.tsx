@@ -9,6 +9,7 @@ import UserCard from "./UserCard";
 // importing icons
 import { HiBell } from "react-icons/hi2";
 import { HiChatBubbleOvalLeft } from "react-icons/hi2";
+import { HiBars3 } from "react-icons/hi2";
 
 export default function Header() {
   const pathname = usePathname();
@@ -23,10 +24,10 @@ export default function Header() {
   ];
 
   return (
-    <div className="w-screen h-auto px-28 py-8 border-neutral-800 border-b-[1px] flex items-center justify-between">
+    <div className="w-screen h-auto px-14 lg:px-28 py-8 lg:py-8 border-neutral-800 border-b-[1px] flex items-center justify-between">
       <div className="flex flex-row gap-16">
         <UserCard />
-        <div className="gap-4 flex flex-row items-center justify-center">
+        <div className="gap-4 hidden lg:flex flex-row items-center justify-center">
           {navItems.map((item) => (
             <Link href={item.path} key={item.name}>
               <h6
@@ -43,7 +44,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="gap-4 flex items-center justify-center">
+      <div className="gap-4 hidden lg:flex items-center justify-center">
         <HiChatBubbleOvalLeft
           className="fill-neutral-600 hover:fill-neutral-300 animation cursor-pointer"
           size={20}
@@ -53,6 +54,12 @@ export default function Header() {
           size={20}
         />
         <input placeholder="Search for"></input>
+      </div>
+      <div>
+        <HiBars3
+          size={30}
+          className="fill-neutral-600 hover:fill-neutral-300 animation cursor-pointer"
+        />
       </div>
     </div>
   );

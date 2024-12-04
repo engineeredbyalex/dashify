@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
+import { HiCurrencyDollar } from "react-icons/hi2";
 
 interface LineItem {
   price: number; // Ensure this is a number
@@ -17,13 +18,15 @@ export default function RevenueStats() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [totalRevenue, setTotalRevenue] = useState(0);
 
+  // Fetch orders once on component mount
   useEffect(() => {
     axios
       .get("api/orders/")
       .then((response) => setOrders(response.data))
       .catch((error) => console.error("Error fetching orders:", error));
-  });
+  }, []); // Add an empty dependency array to ensure it runs only once
 
+  // Recalculate revenue when `orders` state changes
   useEffect(() => {
     const calculateTotalRevenue = () => {
       let total = 0;
@@ -44,16 +47,17 @@ export default function RevenueStats() {
       });
       setTotalRevenue(total);
     };
+
     calculateTotalRevenue();
-  }, [orders]);
+  }, [orders]); // Dependency ensures this effect runs when `orders` changes
 
   return (
     <div className="stat_card_small">
       <div className="w-full flex flex-row justify-between text-neutral-50">
         <p className="text-neutral-300">Total revenue</p>
+        <HiCurrencyDollar size={12} />
       </div>
       <h3 className="text-neutral-50"> {totalRevenue.toFixed(2)} RON</h3>
-
     </div>
   );
 }
