@@ -1,7 +1,7 @@
-import PageHeader from "../components/ui/ui/PageHeader";
-import Header from "../components/ui/ui/Header";
-import ProductList from "../components/ui/ui/ProductList";
-import Button from "../components/ui/ui/Button";
+import PageHeader from "../components/ui/PageHeader";
+import Header from "../components/ui/Header";
+import ProductList from "../components/ui/ProductList";
+import Button from "../components/ui/Button";
 
 export default function Products() {
   return (

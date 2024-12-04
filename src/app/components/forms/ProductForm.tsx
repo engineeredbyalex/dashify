@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { storage } from "@/app/lib/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Image from "next/image";
 
 export default function ProductForm() {
   const [name, setName] = useState("");
@@ -84,13 +85,15 @@ export default function ProductForm() {
           {imagePreviews.length > 0 && (
             <div className="flex gap-2">
               {imagePreviews.map((preview, index) => (
-                <img key={index} src={preview} alt={`Preview ${index}`} />
+                <Image key={index} src={preview} alt={`Preview ${index}`} />
               ))}
             </div>
           )}
         </div>
       </div>
       <div className="flex flex-col gap-7">
+        <div>{error}</div>
+
         <div className="gap-1 flex flex-col">
           <label>Product name</label>
           <input type="text" placeholder="Product name" />

@@ -1,7 +1,7 @@
-import PageHeader from "../components/ui/ui/PageHeader";
-import Header from "../components/ui/ui/Header";
-import Button from "../components/ui/ui/Button";
-import OrderList from "../components/ui/ui/OrdersList";
+import PageHeader from "../components/ui/PageHeader";
+import Header from "../components/ui/Header";
+import Button from "../components/ui/Button";
+import OrderList from "../components/ui/OrdersList";
 
 export default function Orders() {
   return (

@@ -1,15 +1,15 @@
 "use client";
-import ClientsStats from "./components/ui/stats/ClientsStats";
-import MediumStats from "./components/ui/stats/ActiveUsersStats";
-import OrderStats from "./components/ui/stats/OrderStats";
-import RevenueStats from "./components/ui/stats/RevenueStats";
-import UserStats from "./components/ui/stats/UserStats";
-import Button from "./components/ui/ui/Button";
-import Header from "./components/ui/ui/Header";
-import PageHeader from "./components/ui/ui/PageHeader";
+import ClientsStats from "./components/stats/ClientsStats";
+import MediumStats from "./components/stats/ActiveUsersStats";
+import OrderStats from "./components/stats/OrderStats";
+import RevenueStats from "./components/stats/RevenueStats";
+import UserStats from "./components/stats/UserStats";
+import Button from "./components/ui/Button";
+import Header from "./components/ui/Header";
+import PageHeader from "./components/ui/PageHeader";
 import useAuth from "./hooks/useAuth";
-import YearlyOverview from "./components/ui/graphs/YearlyOverview";
-import RecentSales from "./components/ui/stats/RecentSales";
+import YearlyOverview from "./components/graphs/YearlyOverview";
+import RecentSales from "./components/stats/RecentSales";
 
 function Home() {
   useAuth();

@@ -18,7 +18,7 @@ export default function ClientsStats() {
         setUniqueClientsCount(uniqueClients.size);
       })
       .catch((error) => console.error("Error fetching clients:", error));
-  }, []);
+  }, [client]);
 
   return (
     <div className="stat_card_small">

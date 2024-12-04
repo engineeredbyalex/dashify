@@ -1,10 +1,8 @@
 "use client";
-import Link from "next/link";
 import BreadCrumbs from "./Breadcrumbs";
 import { usePathname } from "next/navigation";
 
 // Define a type for the props
-
 
 export default function PageHeader({ children }: any) {
   const pathName = usePathname();

@@ -2,10 +2,10 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Header from "@/app/components/ui/ui/Header";
-import PageHeader from "@/app/components/ui/ui/PageHeader";
-import Button from "@/app/components/ui/ui/Button";
-import ProductForm from "@/app/components/ui/forms/ProductForm";
+import Header from "@/app/components/ui/Header";
+import PageHeader from "@/app/components/ui/PageHeader";
+import Button from "@/app/components/ui/Button";
+import ProductForm from "@/app/components/forms/ProductForm";
 
 export default function CreateProduct() {
   return (
