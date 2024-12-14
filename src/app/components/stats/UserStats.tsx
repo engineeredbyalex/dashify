@@ -10,7 +10,6 @@ export default function UserStats() {
     name: string;
     email: string;
     createdAt: string;
-    [key: string]: any; // Optional: Add this if you expect dynamic keys
   }
 
   const [users, setUsers] = useState<User[]>([]);
