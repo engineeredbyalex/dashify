@@ -1,10 +1,18 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { HiTruck } from "react-icons/hi2";
 
+// Define the structure of the Order object
+interface Order {
+  _id: string;
+  totalAmount: number; // Example field
+  createdAt: string; // Example field
+}
+
 export default function OrderStats() {
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   // Fetch orders with caching
   useEffect(() => {
@@ -17,14 +25,14 @@ export default function OrderStats() {
         const { data, timestamp } = JSON.parse(cachedData);
         if (Date.now() - timestamp < cacheExpiry) {
           console.log("Using cached data");
-          setOrders(data); // Use cached data
+          setOrders(data as Order[]); // Use cached data
           return;
         }
       }
 
       try {
         const response = await axios.get("/api/orders");
-        const data = response.data;
+        const data: Order[] = response.data;
 
         // Cache the response
         localStorage.setItem(

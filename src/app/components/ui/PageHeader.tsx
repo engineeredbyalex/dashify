@@ -1,11 +1,14 @@
 "use client";
+
 import BreadCrumbs from "./Breadcrumbs";
 import { usePathname } from "next/navigation";
 
 // Define a type for the props
+interface PageHeaderProps {
+  children?: React.ReactNode; // Specify that children can be any valid React node
+}
 
-
-export default function PageHeader({ children }: any) {
+export default function PageHeader({ children }: PageHeaderProps) {
   const pathName = usePathname();
 
   // Function to clean and format the pathName

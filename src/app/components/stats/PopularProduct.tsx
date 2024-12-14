@@ -2,7 +2,27 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
+// Uncomment and use if you intend to display images
+// import Image from "next/image";
+
+// Define interfaces for the API data
+interface LineItem {
+  productId: string;
+  quantity: number;
+}
+
+interface Order {
+  _id: string;
+  line_items: LineItem[];
+}
+
+interface Product {
+  _id: string;
+  title: string;
+  photo: string;
+  description?: string;
+  price?: number;
+}
 
 export default function PopularProduct() {
   const [mostPopularProduct, setMostPopularProduct] = useState<{
@@ -17,8 +37,8 @@ export default function PopularProduct() {
     const fetchData = async () => {
       try {
         const [ordersRes, productsRes] = await Promise.all([
-          axios.get("/api/orders"),
-          axios.get("/api/products"),
+          axios.get<Order[]>("/api/orders"),
+          axios.get<Product[]>("/api/products"),
         ]);
 
         const orders = ordersRes.data;
@@ -27,13 +47,11 @@ export default function PopularProduct() {
         const productOrderCount: Record<string, number> = {};
 
         // Calculate order counts for each product
-        orders.forEach((order: any) => {
-          order.line_items.forEach(
-            (item: { productId: string; quantity: number }) => {
-              productOrderCount[item.productId] =
-                (productOrderCount[item.productId] || 0) + item.quantity;
-            }
-          );
+        orders.forEach((order) => {
+          order.line_items.forEach((item) => {
+            productOrderCount[item.productId] =
+              (productOrderCount[item.productId] || 0) + item.quantity;
+          });
         });
 
         // Find the most popular product
@@ -46,7 +64,7 @@ export default function PopularProduct() {
         } | null = null;
 
         Object.entries(productOrderCount).forEach(([productId, count]) => {
-          const product = products.find((p: any) => p._id === productId);
+          const product = products.find((p) => p._id === productId);
           if (product) {
             if (!topProduct || count > topProduct.orders) {
               topProduct = {
@@ -78,12 +96,13 @@ export default function PopularProduct() {
         </h5>
       </div>
       {mostPopularProduct ? (
-        <div className="flex flex-col items-center mt-4  text-neutral-50 p-4 rounded-lg shadow-lg">
+        <div className="flex flex-col items-center mt-4 text-neutral-50 p-4 rounded-lg shadow-lg">
+          {/* Uncomment to display product image */}
           {/* <Image
             src={mostPopularProduct.photo}
-            alt={mostPopularProduct.name}
-            width={24}
-            height={24}
+            alt={mostPopularProduct.title}
+            width={96}
+            height={96}
             className="w-24 h-24 rounded-lg object-cover"
           /> */}
           <h4 className="text-lg font-bold mt-2">{mostPopularProduct.title}</h4>
@@ -93,7 +112,7 @@ export default function PopularProduct() {
             </p>
           )}
           {mostPopularProduct.price && (
-            <p className="  mt-2">{mostPopularProduct.price.toFixed(2)}</p>
+            <p className="mt-2">${mostPopularProduct.price.toFixed(2)}</p>
           )}
           <p className="text-sm text-neutral-50 mt-1">
             Orders:{" "}

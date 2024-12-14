@@ -1,17 +1,26 @@
 "use client";
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { HiMiniUserGroup } from "react-icons/hi2";
 
 export default function UserStats() {
-  const [users, setUsers] = useState<any[]>([]);
+  interface User {
+    _id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+    [key: string]: any; // Optional: Add this if you expect dynamic keys
+  }
+
+  const [users, setUsers] = useState<User[]>([]);
 
   // Fetch users with caching
   useEffect(() => {
     const fetchUsers = async () => {
       const cacheKey = "usersCache";
       const cachedData = localStorage.getItem(cacheKey);
-      const cacheExpiry = 1000 * 60 * 5;
+      const cacheExpiry = 1000 * 60 * 5; // 5 minutes cache duration
 
       if (cachedData) {
         const { data, timestamp } = JSON.parse(cachedData);
@@ -21,8 +30,9 @@ export default function UserStats() {
           return;
         }
       }
+
       try {
-        const response = await axios.get("/api/users");
+        const response = await axios.get<User[]>("/api/users");
         const data = response.data;
 
         // Cache the response

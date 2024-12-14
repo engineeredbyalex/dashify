@@ -4,9 +4,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function RecentSales() {
+  // Define the structure of line items
+  interface LineItem {
+    productId: string;
+    quantity: number;
+    selectedScent?: string; // Adjust fields as per your actual data structure
+    selectedDecoration?: string;
+    title?: string;
+  }
+
+  // Define the structure of an order
   interface Order {
     _id: string;
-    line_items: Object;
+    line_items: LineItem[];
     name: string;
     email: string;
     city: string;
@@ -36,7 +46,7 @@ export default function RecentSales() {
       }
 
       try {
-        const response = await axios.get("/api/orders");
+        const response = await axios.get<Order[]>("/api/orders");
         const data = response.data;
 
         // Cache the response
