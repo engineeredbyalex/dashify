@@ -6,15 +6,15 @@ import Loader from "../ui/Loader";
 
 interface Order {
   _id: string;
-  line_items: Object;
-  name: String;
-  email: String;
-  city: String;
-  postalCode: String;
-  streetAddress: String;
-  country: String;
-  paid: Boolean;
-  status: String;
+  line_items: object;
+  name: string;
+  email: string;
+  city: string;
+  postalCode: string;
+  streetAddress: string;
+  country: string;
+  paid: boolean;
+  status: string;
 }
 
 export default function OrderList() {
@@ -24,13 +24,19 @@ export default function OrderList() {
   useEffect(() => {
     setLoading(false);
     const fetchOrders = async () => {
-      const response = await axios.get("/api/orders");
-      setOrders(response.data);
-      setLoading(true);
+      try {
+        const response = await axios.get("/api/orders");
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+      } finally {
+        setLoading(true);
+      }
     };
     fetchOrders();
   }, []);
-  if (loading === false) {
+
+  if (!loading) {
     return (
       <div className="flex w-full h-full items-center justify-center">
         <Loader />
@@ -42,7 +48,7 @@ export default function OrderList() {
     <div className="w-full flex flex-col">
       {orders.map((order) => (
         <div key={order._id} className="product_list">
-          <div className="text-base">Order ID : {order._id}</div>
+          <div className="text-base">Order ID: {order._id}</div>
         </div>
       ))}
     </div>
