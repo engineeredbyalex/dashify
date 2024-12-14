@@ -96,28 +96,28 @@ export default function YearlyOverview() {
     responsive: true,
     plugins: {
       legend: {
-        display: false, // Hides the legend
+        display: false,
       },
     },
     scales: {
       y: {
-        type: "linear", // Correct scale type
+        type: "linear" as const,
         beginAtZero: true,
         ticks: {
-          callback: (value: number) => `${value.toLocaleString()} $`, // Correct callback
-          color: "#A3A3A3", // Neutral 400
+          callback: (tickValue: string | number) =>
+            `${tickValue.toLocaleString()} $`,
+          color: "#A3A3A3",
         },
-        grid: { color: "#1F2937" }, // Neutral 800
+        grid: { color: "#1F2937" },
       },
       x: {
-        type: "category", // Correct scale type
-        ticks: { color: "#A3A3A3" }, // Neutral 400
+        type: "category" as const,
+        ticks: { color: "#A3A3A3" },
         grid: { display: false },
       },
     },
   };
 
-  // @ts-ignore
   return (
     <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
       <h2 className="text-neutral-50 text-xl font-semibold">Overview</h2>
