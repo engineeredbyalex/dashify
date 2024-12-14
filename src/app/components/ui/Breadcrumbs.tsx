@@ -3,7 +3,7 @@
 // Importing usePathname to get the current path of the page
 import { usePathname } from "next/navigation";
 
-export default function BreadCrumbs() {
+export default function Breadcrumbs() {
   const pathName = usePathname();
 
   // Function to clean and format the pathName

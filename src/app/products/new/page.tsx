@@ -15,13 +15,13 @@ export default function CreateProduct() {
         <PageHeader>
           <Button
             route="/products"
-            text="Delete product"
-            style="button_destructive"
+            text="Preview product"
+            style="button_outline"
           />
           <Button
             route="/products"
-            text="Preview product"
-            style="button_outline"
+            text="Delete product"
+            style="button_destructive"
           />
           <Button
             route="/products"

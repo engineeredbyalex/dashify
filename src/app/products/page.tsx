@@ -1,13 +1,13 @@
 import PageHeader from "../components/ui/PageHeader";
 import Header from "../components/ui/Header";
-import ProductList from "../components/ui/ProductList";
+import ProductList from "../components/lists/ProductList";
 import Button from "../components/ui/Button";
 
 export default function Products() {
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
-      <div className="px-28 py-9">
+      <div className="px-4 lg:mx-28 py-9">
         <PageHeader>
           <Button
             route="/products"

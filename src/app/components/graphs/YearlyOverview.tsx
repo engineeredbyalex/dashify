@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import axios from "axios";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
@@ -14,7 +15,8 @@ import {
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
@@ -39,8 +41,13 @@ export default function YearlyOverview() {
     datasets: [
       {
         data: Array(12).fill(0), // Initialize with zeros for each month
-        backgroundColor: "#2563EB", // Tailwind's blue-600
-        borderRadius: 8, // Rounded bars
+        borderColor: "#2563EB", // Tailwind's blue-600
+        backgroundColor: "rgba(37, 99, 235, 0.3)", // Semi-transparent blue fill
+        tension: 0.4, // Smooth bends in the line
+        fill: true, // Fill under the line
+        pointRadius: 4, // Size of points
+        pointHoverRadius: 6, // Size of hovered points
+        pointBackgroundColor: "#2563EB", // Point fill color
       },
     ],
   });
@@ -111,10 +118,8 @@ export default function YearlyOverview() {
   return (
     <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
       <h2 className="text-neutral-50 text-xl font-semibold">Overview</h2>
-      <p className="text-neutral-400 mb-4">
-        This is your yearly overview of your income.
-      </p>
-      <Bar data={data} options={chartOptions} />
+      <h5 className="text-neutral-600">This is your yearly Overview.</h5>
+      <Line data={data} options={chartOptions} />
     </div>
   );
 }

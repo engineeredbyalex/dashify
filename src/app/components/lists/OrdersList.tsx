@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Loader from "../ui/Loader";
 
 interface Order {
   _id: string;
@@ -18,14 +19,25 @@ interface Order {
 
 export default function OrderList() {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(false);
     const fetchOrders = async () => {
       const response = await axios.get("/api/orders");
       setOrders(response.data);
+      setLoading(true);
     };
     fetchOrders();
   }, []);
+  if (loading === false) {
+    return (
+      <div className="flex w-full h-full items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full flex flex-col">
       {orders.map((order) => (

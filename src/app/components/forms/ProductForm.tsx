@@ -96,67 +96,91 @@ export default function ProductForm() {
 
         <div className="gap-1 flex flex-col">
           <label>Product name</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productName" />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Description</label>
-          <input type="text" placeholder="Product name" />
+          <input
+            type="text"
+            placeholder="Product name"
+            name="productDescription"
+          />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Categoy</label>
-          <input type="text" placeholder="Product name" />
+          <input
+            type="text"
+            placeholder="Product name"
+            name="productCategory"
+          />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Subcategoy</label>
-          <input type="text" placeholder="Product name" />
+          <input
+            type="text"
+            placeholder="Product name"
+            name="prodcutSubcategory"
+          />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product SKU</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productSKU" />
         </div>
       </div>
       <div className="flex flex-col gap-7">
         <div className="gap-1 flex flex-col">
           <label>Product name</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productPrice" />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Description</label>
-          <input type="text" placeholder="Product name" />
+          <input
+            type="text"
+            placeholder="Product name"
+            name="productDiscountedPrice"
+          />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Categoy</label>
-          <input type="text" placeholder="Product name" />
+          <input
+            type="text"
+            placeholder="Product name"
+            name="productCategory"
+          />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Subcategoy</label>
-          <input type="text" placeholder="Product name" />
+          <input
+            type="text"
+            placeholder="Product name"
+            name="productProperty"
+          />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product SKU</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productStock" />
         </div>
       </div>
       <div className="flex flex-col gap-7">
         <div className="gap-1 flex flex-col">
           <label>Product name</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productBrand" />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Description</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productWeight" />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Categoy</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="weightUnit" />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product Subcategoy</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="productTime" />
         </div>
         <div className="gap-1 flex flex-col">
           <label>Product SKU</label>
-          <input type="text" placeholder="Product name" />
+          <input type="text" placeholder="Product name" name="" />
         </div>
       </div>
     </form>

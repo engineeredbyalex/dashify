@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 // Define a type for the props
 
+
 export default function PageHeader({ children }: any) {
   const pathName = usePathname();
 
@@ -22,13 +23,13 @@ export default function PageHeader({ children }: any) {
 
   return (
     <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between gap-4">
-      <div className="text-neutral-50 w-full">
+      <div className="text-neutral-50 w-full lg:w-auto">
         <h1>{getCleanedPathname()}</h1>
         <div>
           <BreadCrumbs />
         </div>
       </div>
-      <div className="gap-2 flex w-full flex-row">{children}</div>
+      <div className="w-full lg:w-auto gap-2 flex flex-row">{children}</div>
     </div>
   );
 }
