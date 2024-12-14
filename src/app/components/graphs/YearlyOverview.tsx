@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -101,20 +101,23 @@ export default function YearlyOverview() {
     },
     scales: {
       y: {
+        type: "linear", // Correct scale type
         beginAtZero: true,
         ticks: {
-          callback: (value: number) => `${value.toLocaleString()} $`,
+          callback: (value: number) => `${value.toLocaleString()} $`, // Correct callback
           color: "#A3A3A3", // Neutral 400
         },
         grid: { color: "#1F2937" }, // Neutral 800
       },
       x: {
+        type: "category", // Correct scale type
         ticks: { color: "#A3A3A3" }, // Neutral 400
         grid: { display: false },
       },
     },
   };
 
+  // @ts-ignore
   return (
     <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
       <h2 className="text-neutral-50 text-xl font-semibold">Overview</h2>
