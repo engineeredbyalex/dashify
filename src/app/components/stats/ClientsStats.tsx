@@ -1,7 +1,15 @@
 "use client";
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { HiMiniUserGroup } from "react-icons/hi2";
+
+// Define the structure of the Order object
+interface Order {
+  _id: string;
+  name: string; // Client's name
+  // Add other fields as necessary
+}
 
 export default function ClientsStats() {
   const [uniqueClientsCount, setUniqueClientsCount] = useState(0);
@@ -16,14 +24,14 @@ export default function ClientsStats() {
         const { data, timestamp } = JSON.parse(cachedData);
         if (Date.now() - timestamp < cacheExpiry) {
           console.log("Using cached data");
-          processClients(data);
+          processClients(data as Order[]);
           return;
         }
       }
 
       try {
         const response = await axios.get("/api/orders");
-        const data = response.data;
+        const data: Order[] = response.data;
 
         // Cache the response
         localStorage.setItem(
@@ -37,10 +45,8 @@ export default function ClientsStats() {
       }
     };
 
-    const processClients = (data: any[]) => {
-      const uniqueClients = new Set(
-        data.map((client: { name: string }) => client.name)
-      );
+    const processClients = (data: Order[]) => {
+      const uniqueClients = new Set(data.map((client) => client.name));
       setUniqueClientsCount(uniqueClients.size);
     };
 

@@ -1,16 +1,21 @@
 "use client";
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+interface Order {
+  _id: string;
+  city: string;
+}
+
 export default function CityStats() {
-  const [orders, setOrders] = useState<any[]>([]);
   const [cityStats, setCityStats] = useState<{ city: string; count: number }[]>(
     []
   );
 
   // Fetch orders with caching
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchAndCalculateCityStats = async () => {
       const cacheKey = "ordersCache";
       const cachedData = localStorage.getItem(cacheKey);
       const cacheExpiry = 1000 * 60 * 5; // 5 minutes
@@ -19,15 +24,14 @@ export default function CityStats() {
         const { data, timestamp } = JSON.parse(cachedData);
         if (Date.now() - timestamp < cacheExpiry) {
           console.log("Using cached data");
-          setOrders(data); // Use cached data
-          calculateCityStats(data);
+          calculateCityStats(data as Order[]);
           return;
         }
       }
 
       try {
         const response = await axios.get("/api/orders");
-        const data = response.data;
+        const data: Order[] = response.data;
 
         // Cache the response
         localStorage.setItem(
@@ -35,18 +39,17 @@ export default function CityStats() {
           JSON.stringify({ data, timestamp: Date.now() })
         );
 
-        setOrders(data); // Set the state with fetched data
         calculateCityStats(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
     };
 
-    fetchOrders();
+    fetchAndCalculateCityStats();
   }, []);
 
   // Calculate city statistics
-  const calculateCityStats = (orders: any[]) => {
+  const calculateCityStats = (orders: Order[]) => {
     const cityCount: Record<string, number> = {};
 
     orders.forEach((order) => {
@@ -73,7 +76,7 @@ export default function CityStats() {
   return (
     <div className="stat_card text-neutral-50">
       <div className="flex flex-col">
-        <h3 className="text-neutral-50  font-semibold">Overview of cities</h3>
+        <h3 className="text-neutral-50 font-semibold">Overview of cities</h3>
         <h5 className="text-neutral-600">
           This is your overview of the most popular cities.
         </h5>
@@ -101,30 +104,25 @@ export default function CityStats() {
             </div>
           ))}
         </div>
-        <div className="">
-          <div className="w-full h-7 rounded-lg relative overflow-hidden">
-            {cityStats.map(({ city, count }, index) => (
-              <div
-                key={city}
-                className={`absolute top-0 h-full ${
-                  index === 0
-                    ? "bg-blue-600"
-                    : index === 1
-                    ? "bg-blue-400"
-                    : "bg-blue-200"
-                }`}
-                style={{
-                  width: `${getPercentage(count)}%`,
-                  left: `${cityStats
-                    .slice(0, index)
-                    .reduce(
-                      (acc, { count }) => acc + getPercentage(count),
-                      0
-                    )}%`,
-                }}
-              ></div>
-            ))}
-          </div>
+        <div className="w-full h-7 rounded-lg relative overflow-hidden mt-2">
+          {cityStats.map(({ city, count }, index) => (
+            <div
+              key={city}
+              className={`absolute top-0 h-full ${
+                index === 0
+                  ? "bg-blue-600"
+                  : index === 1
+                  ? "bg-blue-400"
+                  : "bg-blue-200"
+              }`}
+              style={{
+                width: `${getPercentage(count)}%`,
+                left: `${cityStats
+                  .slice(0, index)
+                  .reduce((acc, { count }) => acc + getPercentage(count), 0)}%`,
+              }}
+            ></div>
+          ))}
         </div>
       </div>
     </div>

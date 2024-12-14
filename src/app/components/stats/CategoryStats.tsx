@@ -23,16 +23,13 @@ interface Category {
 }
 
 export default function Stats() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
   const [categoryStats, setCategoryStats] = useState<
     { categoryName: string; count: number }[]
   >([]);
 
-  // Fetch data
+  // Fetch data and calculate stats
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAndCalculateStats = async () => {
       try {
         const [ordersRes, categoriesRes, productsRes] = await Promise.all([
           axios.get("/api/orders"),
@@ -40,55 +37,46 @@ export default function Stats() {
           axios.get("/api/products"),
         ]);
 
-        setOrders(ordersRes.data);
-        setCategories(categoriesRes.data);
-        setProducts(productsRes.data);
-        calculateCategoryStats(
-          ordersRes.data,
-          productsRes.data,
-          categoriesRes.data
-        );
+        const orders: Order[] = ordersRes.data;
+        const categories: Category[] = categoriesRes.data;
+        const products: Product[] = productsRes.data;
+
+        const categoryCount: Record<string, number> = {};
+
+        // Calculate category counts
+        orders.forEach((order) => {
+          order.line_items.forEach((item) => {
+            const product = products.find(
+              (prod) => prod._id === item.productId
+            );
+
+            if (product) {
+              const category = categories.find(
+                (cat) => cat._id === product.category
+              );
+
+              if (category) {
+                categoryCount[category.name] =
+                  (categoryCount[category.name] || 0) + item.quantity;
+              }
+            }
+          });
+        });
+
+        // Sort and store top 3 categories
+        const sortedCategories = Object.entries(categoryCount)
+          .map(([categoryName, count]) => ({ categoryName, count }))
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 3);
+
+        setCategoryStats(sortedCategories);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData();
+    fetchDataAndCalculateStats();
   }, []);
-
-  const calculateCategoryStats = (
-    orders: Order[],
-    products: Product[],
-    categories: Category[]
-  ) => {
-    const categoryCount: Record<string, number> = {};
-
-    // Calculate counts
-    orders.forEach((order) => {
-      order.line_items.forEach((item) => {
-        const product = products.find((prod) => prod._id === item.productId);
-
-        if (product) {
-          const category = categories.find(
-            (cat) => cat._id === product.category
-          );
-
-          if (category) {
-            categoryCount[category.name] =
-              (categoryCount[category.name] || 0) + item.quantity;
-          }
-        }
-      });
-    });
-
-    // Convert to array, sort, and take the top 3
-    const sortedCategories = Object.entries(categoryCount)
-      .map(([categoryName, count]) => ({ categoryName, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 3);
-
-    setCategoryStats(sortedCategories);
-  };
 
   // Calculate total for top 3 categories
   const topCategoriesTotal = categoryStats.reduce(
