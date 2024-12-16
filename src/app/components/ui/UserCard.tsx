@@ -11,34 +11,33 @@ export default function UserCard() {
 
   return (
     <div className="relative user_card">
-      <div className="flex items-center justify-evenly gap-5">
+      <div
+        onClick={() => setToggle(!toggle)}
+        className="flex items-center justify-evenly gap-5"
+      >
         <div className="flex flex-row gap-2 items-center">
-          <div className="w-5 h-5 rounded-full bg-neutral-50"></div>
-          <p>
+          <div className="w-4 h-4 rounded-full bg-neutral-50"></div>
+          <h6>
             {session?.user?.name
               ? `Hello, ${session.user.name}!`
               : "No name found"}
-          </p>
+          </h6>
         </div>
-        <HiChevronDown
-          onClick={() => setToggle(!toggle)}
-          size={16}
-          className="fill-neutral-600 cursor-pointer"
-        />
+        <HiChevronDown size={16} className="fill-neutral-600 cursor-pointer" />
       </div>
 
       {/* Dropdown Content */}
       {toggle && (
         <div className="user_card_toggled">
           <Link href={"/user_settings"}>
-            <p className="cursor-pointer">Settings</p>
+            <h6 className="cursor-pointer">Settings</h6>
           </Link>
           <Link href={"/support"}>
-            <p className="cursor-pointer">Support</p>
+            <h6 className="cursor-pointer">Support</h6>
           </Link>
-          <p className="cursor-pointer" onClick={() => signOut()}>
+          <h6 className="cursor-pointer" onClick={() => signOut()}>
             Sign out
-          </p>
+          </h6>
         </div>
       )}
     </div>

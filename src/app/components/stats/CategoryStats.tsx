@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ExportCSV from "../utilities/ExportCSV";
 
 interface LineItem {
   productId: string;
@@ -22,7 +23,7 @@ interface Category {
   name: string;
 }
 
-export default function Stats() {
+export default function CategoryStats() {
   const [categoryStats, setCategoryStats] = useState<
     { categoryName: string; count: number }[]
   >([]);

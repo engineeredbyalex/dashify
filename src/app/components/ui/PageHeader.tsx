@@ -32,7 +32,9 @@ export default function PageHeader({ children }: PageHeaderProps) {
           <BreadCrumbs />
         </div>
       </div>
-      <div className="w-full lg:w-auto gap-2 flex flex-row">{children}</div>
+      <div className="w-full lg:w-auto gap-2 flex flex-col lg:flex-row">
+        {children}
+      </div>
     </div>
   );
 }

@@ -1,48 +1,52 @@
 "use client";
-import YearlyOverview from "./components/graphs/YearlyOverview";
-import CategoryStats from "./components/stats/CategoryStats";
-import CityStats from "./components/stats/CityStats";
-import ClientsStats from "./components/stats/ClientsStats";
-import OrderStats from "./components/stats/OrderStats";
-import PopularProduct from "./components/stats/PopularProduct";
-import RecentSales from "./components/stats/RecentSalesStats";
-import RevenueStats from "./components/stats/RevenueStats";
-import UserStats from "./components/stats/UserStats";
-import Header from "./components/ui/Header";
 import PageHeader from "./components/ui/PageHeader";
+import Button from "./components/ui/Button";
+import Header from "./components/ui/Header";
 import useAuth from "./hooks/useAuth";
+import RevenueStats from "./components/stats/RevenueStats";
+import OrderStats from "./components/stats/OrderStats";
+import YearlyOverview from "./components/graphs/YearlyOverview";
+import CityStats from "./components/stats/CityStats";
+import CategoryStats from "./components/stats/CategoryStats";
+import RecentSales from "./components/stats/RecentSalesStats";
+import ClientsStats from "./components/stats/ClientsStats";
+import UserStats from "./components/stats/UserStats";
 
 function Home() {
   useAuth();
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-start">
+    <div className="">
       <Header />
-      <div className="w-full h-auto flex flex-col gap-9 mt-5">
-        <div className="px-4 lg:px-28">
-          <PageHeader />
+      <div className="px-4 lg:mx-28 mt-8">
+        <PageHeader>
+          <Button
+            route="statistics/export"
+            text="Export data"
+            style="button_primary"
+          />
+        </PageHeader>
+      </div>
+      <div className="px-4 lg:mx-28 mt-8 gap-8 flex flex-col">
+        <div className="gap-4 grid grid-cols-2 lg:flex">
+          <RevenueStats />
+          <OrderStats />
+          <RevenueStats />
+          <ClientsStats />
+          <UserStats />
         </div>
-        <div className="px-4 lg:px-28 gap-5 flex flex-col">
-          <div className="w-full  gap-5 flex">
-            <RevenueStats />
-            <OrderStats />
+        <div className="gap-8 flex flex-col lg:grid grid-cols-2">
+          <div>
+            <YearlyOverview />
           </div>
-          <div className="w-full  gap-5 flex">
-            <ClientsStats />
-            <UserStats />
+          <div className="gap-4 lg:gap-0 flex flex-col justify-between">
+            <CityStats />
+            <CategoryStats />
           </div>
         </div>
-        <div className="px-4 lg:px-28 gap-5 flex flex-col">
-          <CityStats />
-          <CategoryStats />
-          <PopularProduct />
-          <YearlyOverview />
-          <RecentSales />
-        </div>
+        <RecentSales />
       </div>
     </div>
   );
 }
 
 export default Home;
-
-

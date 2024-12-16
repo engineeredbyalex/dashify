@@ -65,24 +65,26 @@ export default function RecentSales() {
   }, []); // Empty dependency array ensures this runs only once
 
   return (
-    <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
+    <div className="w-full bg-neutral-950 px-6 py-6 rounded-lg border-[1px] border-neutral-800">
       <h3 className="text-neutral-50">Recent sales</h3>
       <h5 className="text-neutral-600">You made {orders.length} sales.</h5>
-      {orders.slice(0, 7).map((order) => (
-        <div
-          key={order._id}
-          className="flex flex-row items-center gap-2 mt-3 justify-between"
-        >
-          <div className="flex flex-row items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-white"></div>
-            <div className="flex flex-col">
-              <div className="text-base text-neutral-50">{order.name}</div>
-              <p className="text-neutral-600">{order.email}</p>
+      <div className="gap-4 flex flex-col lg:grid grid-cols-3 mt-4">
+        {orders.slice(0, 7).map((order) => (
+          <div
+            key={order._id}
+            className="border-[1px] border-neutral-800 lg:px-3 lg:py-2 px-2 py-1 rounded-lg flex flex-row items-center justify-between"
+          >
+            <div className="flex flex-row items-center gap-2">
+              <div className="w-10 h-10 rounded-full bg-white"></div>
+              <div className="flex flex-col">
+                <p className="text-neutral-400">Order Id : {order._id}</p>
+                <h5 className=" text-neutral-50">{order.name}</h5>
+                <h6 className="text-neutral-400">{order.email}</h6>
+              </div>
             </div>
           </div>
-          <h6 className="text-neutral-50">RON</h6>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

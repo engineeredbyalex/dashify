@@ -37,7 +37,7 @@ p {
 }
 /* Navigation Bar */
 .navigation_bar {
- @apply w-screen h-auto px-4 lg:px-28 py-8 lg:py-8 border-neutral-800 border-b-[1px] flex items-center justify-between 
+ @apply w-screen h-auto px-4 lg:px-28 py-3 lg:py-3 border-neutral-800 border-b-[1px] flex items-center justify-between 
 }
 .navigation_bar_toggled {
   @apply bg-neutral-950 absolute top-0 left-0 w-screen h-screen
@@ -52,11 +52,11 @@ p {
 }
 
 .user_card {
-  @apply min-w-32 px-2 py-1 rounded-lg border-[1px] border-neutral-800 
+  @apply min-w-32 lg:px-2 lg:py-1 px-3 py-2 rounded-lg border-[1px] border-neutral-800 
     text-neutral-50 flex flex-col gap-4 items-center justify-evenly z-[11];
 }
 .user_card_toggled {
-  @apply absolute top-full left-0 mt-2 w-full px-2 py-1 bg-neutral-950 
+  @apply absolute top-full left-0 mt-2 w-full lg:px-2 lg:py-1 px-3 py-2 bg-neutral-950 
     rounded-lg border-[1px] border-neutral-800 text-neutral-50 z-[11];
 }
 
@@ -81,7 +81,7 @@ input::file-selector-button{
 
 /* Buttons */
 button {
-  @apply h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg flex flex-row items-center 
+  @apply w-full h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg flex flex-row items-center 
     justify-center transition-all ease-in-out duration-200 text-sm;
 }
 .button_primary {
@@ -125,7 +125,7 @@ button {
 
 /* Stats cards */
 .stat_card_small {
-  @apply w-full h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg flex flex-col ;
+  @apply w-full h-auto lg:px-6 lg:py-3 px-3 py-3 border-[1px] border-neutral-800 rounded-lg flex flex-col ;
 }
 .stat_card_medium {
   @apply w-full h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
@@ -135,5 +135,5 @@ button {
 }
 /* Product data */
 .product_list{
-  @apply  border-b-[1px] border-neutral-600 pb-2 flex flex-row items-center justify-between text-neutral-50
+  @apply w-full h-auto  border-b-[1px] border-neutral-600 pb-4 flex flex-col lg:flex-row items-center justify-between text-neutral-50
 }

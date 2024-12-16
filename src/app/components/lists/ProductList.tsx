@@ -3,20 +3,29 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Button from "../ui/Button";
 import Loader from "../ui/Loader";
+import { HiStar } from "react-icons/hi2";
+import { HiCurrencyDollar } from "react-icons/hi2";
 
 interface Product {
   _id: string;
-  name: string;
+  title: string;
   description: string;
   price: number;
   category: string;
   stock: number;
   images: string[];
+  views: string;
+  saves: string;
+  orders: string;
+  reviews: string;
 }
 
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const itemsPerPage = 5;
 
   // Fetch products with caching
   useEffect(() => {
@@ -30,6 +39,7 @@ export default function ProductList() {
         if (Date.now() - timestamp < cacheExpiry) {
           console.log("Using cached product data");
           setProducts(data); // Use cached data
+          setTotalPages(Math.ceil(data.length / itemsPerPage));
           setLoading(true); // Set loading to true to render the data
           return;
         }
@@ -48,6 +58,7 @@ export default function ProductList() {
         );
 
         setProducts(data); // Set the state with fetched data
+        setTotalPages(Math.ceil(data.length / itemsPerPage));
         setLoading(true); // Set loading to true after fetching
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -57,6 +68,15 @@ export default function ProductList() {
     fetchProducts();
   }, []); // Empty dependency array ensures this runs only once
 
+  const handlePageChange = (direction: "next" | "prev") => {
+    if (direction === "next" && currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+    if (direction === "prev" && currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
   if (!loading) {
     return (
       <div className="flex w-full h-full items-center justify-center">
@@ -65,28 +85,90 @@ export default function ProductList() {
     );
   }
 
+  // Pagination logic
+  const paginatedProducts = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <div className="w-full flex flex-col">
-      {products.map((product) => (
-        <div key={product._id} className="product_list">
-          <div className="gap-8 flex flex-row items-center">
-            <div className="gap-4 flex flex-row items-center">
-              <div className="w-10 h-10 bg-white"></div>
-              <div className="text-base">{product.name}</div>
+      <div className="w-full gap-4 flex flex-col">
+        {paginatedProducts?.length > 0 ? (
+          paginatedProducts.map((product) => (
+            <div key={product._id} className="product_list">
+              <div className="w-full flex gap-4">
+                {/* Product Image */}
+                <div className="w-14 h-14 lg:w-16 lg:h-16">
+                  <img src={product.images[0]} className="rounded-lg" />
+                </div>
+                {/* Product Image */}
+                {/* Produtct Info */}
+                <div>
+                  <h5>{product.title}</h5>
+                  <div className="flex  items-center justify-between">
+                    <div className="flex gap-1 items-center">
+                      <HiCurrencyDollar className="fill-neutral-50" size={20} />
+                      <h6>{product.price.toFixed(2)} RON</h6>
+                    </div>
+                    <div className="flex gap-1 items-center">
+                      <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                      <h6>{product.price.toFixed(2)} RON</h6>
+                    </div>
+                    <div className="flex gap-1 items-center">
+                      <HiStar className="fill-yellow-500" size={20} />
+                      <h6>Reviews : {product.reviews}</h6>
+                    </div>
+                  </div>
+                </div>
+                {/* Produtct Info */}
+              </div>
+              <div className="w-full lg:w-1/3">
+                <div className="w-full mt-4">
+                  <Button
+                    route={`/products/edit/${product._id}`}
+                    text="Edit product"
+                    style="button_postive"
+                  />
+                </div>
+                <div className="w-full flex flex-row justify-between mt-4">
+                  <div className="flex gap-1">
+                    <HiStar className="fill-yellow-500" size={20} />
+                    <h6>{product.views} views</h6>
+                  </div>
+                  <div className="flex gap-1">
+                    <HiStar className="fill-yellow-500" size={20} />
+                    <h6>{product.orders} orders</h6>
+                  </div>
+                  <div className="flex gap-1">
+                    <HiStar className="fill-yellow-500" size={20} />
+                    <h6>{product.saves} saves</h6>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="gap-4 flex flex-row">
-              <div>Price: {product.price.toFixed(2)} RON</div>
-              <div>Discounted price: {product.price.toFixed(2)} RON</div>
-              <div>Stock: {product.stock} Units</div>
-            </div>
-          </div>
-          <Button
-            route={"/products/edit/" + product._id}
-            text="Edit the product"
-            style="button_postive"
-          />
-        </div>
-      ))}
+          ))
+        ) : (
+          <p className="text-neutral-500 text-center">No products available.</p>
+        )}
+      </div>
+
+      {/* Pagination controls */}
+      <div className="flex flex-row justify-between items-center mt-4">
+        <button
+          className="w-9 h-9 bg-blue-600 rounded-lg"
+          onClick={() => handlePageChange("prev")}
+          disabled={currentPage === 1}
+        />
+        <p className="text-neutral-500">
+          Page {currentPage} of {totalPages}
+        </p>
+        <button
+          className="w-9 h-9 bg-blue-600 rounded-lg"
+          onClick={() => handlePageChange("next")}
+          disabled={currentPage === totalPages}
+        />
+      </div>
     </div>
   );
 }
