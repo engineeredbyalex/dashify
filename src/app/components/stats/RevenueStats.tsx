@@ -67,7 +67,7 @@ export default function RevenueStats() {
             if (!isNaN(price) && !isNaN(quantity)) {
               total += price * quantity; // Calculate revenue
             } else {
-              console.error("Invalid price or quantity for item:", item);
+              // console.error("Invalid price or quantity for item:", item);
             }
           });
         }

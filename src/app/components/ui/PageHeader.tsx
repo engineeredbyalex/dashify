@@ -26,13 +26,13 @@ export default function PageHeader({ children }: PageHeaderProps) {
 
   return (
     <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between gap-4">
-      <div className="text-neutral-50 w-full lg:w-auto">
+      <div className="text-neutral-50 w-full lg:w-2/3">
         <h1>{getCleanedPathname()}</h1>
         <div>
           <BreadCrumbs />
         </div>
       </div>
-      <div className="w-full lg:w-auto gap-2 flex flex-col lg:flex-row">
+      <div className="w-full lg:w-1/3 gap-2 flex flex-row justify-between lg:justify-end">
         {children}
       </div>
     </div>

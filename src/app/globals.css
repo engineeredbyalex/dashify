@@ -35,39 +35,36 @@ p {
 .animation {
   @apply transition-all ease-in-out duration-300;
 }
+
+/* Components */
 /* Navigation Bar */
 .navigation_bar {
- @apply w-screen h-auto px-4 lg:px-28 py-3 lg:py-3 border-neutral-800 border-b-[1px] flex items-center justify-between 
+  @apply w-screen h-auto px-4 lg:px-28 py-3 lg:py-3 border-neutral-800 border-b-[1px] flex items-center justify-between;
 }
 .navigation_bar_toggled {
-  @apply bg-neutral-950 absolute top-0 left-0 w-screen h-screen
+  @apply bg-neutral-950 absolute top-0 left-0 w-screen h-screen;
 }
 .navigation_bar_links {
-  @apply gap-4 h-screen flex flex-col items-center justify-center
-}
-/* Components */
-.card {
-  @apply min-w-[356px] px-5 py-5 border border-neutral-800 rounded-lg 
-    flex flex-col gap-6;
+  @apply gap-4 h-screen flex flex-col items-center justify-center;
 }
 
+/* Cards */
+.card {
+  @apply min-w-[356px] px-5 py-5 border border-neutral-800 rounded-lg flex flex-col gap-6;
+}
 .user_card {
-  @apply min-w-32 lg:px-2 lg:py-1 px-3 py-2 rounded-lg border-[1px] border-neutral-800 
-    text-neutral-50 flex flex-col gap-4 items-center justify-evenly z-[11];
+  @apply min-w-32 lg:px-2 lg:py-1 px-3 py-2 rounded-lg border-[1px] border-neutral-800 text-neutral-50 flex flex-col gap-4 items-center justify-evenly z-[11];
 }
 .user_card_toggled {
-  @apply absolute top-full left-0 mt-2 w-full lg:px-2 lg:py-1 px-3 py-2 bg-neutral-950 
-    rounded-lg border-[1px] border-neutral-800 text-neutral-50 z-[11];
+  @apply absolute top-full left-0 mt-2 w-full lg:px-2 lg:py-1 px-3 py-2 bg-neutral-950 rounded-lg border-[1px] border-neutral-800 text-neutral-50 z-[11];
 }
 
 /* Forms */
 label {
   @apply text-sm leading-[22px] text-neutral-50;
 }
-
 input {
-  @apply min-w-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 
-    text-xs leading-[20px] text-neutral-500 animation;
+  @apply min-w-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 text-xs leading-[20px] text-neutral-500 animation;
 }
 input:hover {
   @apply border-neutral-600 text-neutral-300;
@@ -75,14 +72,13 @@ input:hover {
 input:active {
   @apply border-neutral-400 text-neutral-50;
 }
-input::file-selector-button{
-  @apply bg-transparent border-none text-sm text-neutral-500
+input::file-selector-button {
+  @apply bg-transparent border-none text-sm text-neutral-500;
 }
 
 /* Buttons */
 button {
-  @apply w-full h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg flex flex-row items-center 
-    justify-center transition-all ease-in-out duration-200 text-sm;
+  @apply w-full h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg flex flex-row items-center justify-center transition-all ease-in-out duration-200 text-sm;
 }
 .button_primary {
   @apply text-neutral-950 bg-neutral-50 border-[1px] border-neutral-50;
@@ -96,17 +92,17 @@ button {
 .button_outline:hover {
   @apply border-[1px] border-neutral-300 text-neutral-50;
 }
-.button_destructive{
-  @apply bg-red-600 border-[1px] border-red-600 text-neutral-50 animation
+.button_destructive {
+  @apply bg-red-600 border-[1px] border-red-600 text-neutral-50 animation;
 }
-.button_destructive:hover{
-  @apply bg-red-700 border-[1px] border-red-700 text-neutral-50 animation
+.button_destructive:hover {
+  @apply bg-red-700 border-[1px] border-red-700 text-neutral-50 animation;
 }
-.button_postive{
-  @apply bg-green-600 border-[1px] border-green-600 text-neutral-50 animation
+.button_postive {
+  @apply bg-green-600 border-[1px] border-green-600 text-neutral-50 animation;
 }
-.button_postive:hover{
-  @apply bg-green-700 border-[1px] border-green-700 text-neutral-50 animation 
+.button_postive:hover {
+  @apply bg-green-700 border-[1px] border-green-700 text-neutral-50 animation;
 }
 .button_link {
   @apply text-neutral-50;
@@ -123,17 +119,18 @@ button {
   @apply text-neutral-600 hover:text-neutral-50 animation;
 }
 
-/* Stats cards */
+/* Stats Cards */
 .stat_card_small {
-  @apply w-full h-auto lg:px-6 lg:py-3 px-3 py-3 border-[1px] border-neutral-800 rounded-lg flex flex-col ;
+  @apply w-full h-auto lg:px-6 lg:py-3 px-3 py-3 border-[1px] border-neutral-800 rounded-lg flex flex-col;
 }
 .stat_card_medium {
-  @apply w-full h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg
+  @apply w-full h-auto px-6 py-3 border-[1px] border-neutral-800 rounded-lg;
 }
 .stat_card {
   @apply w-full h-auto px-6 py-6 border-[1px] border-neutral-800 rounded-lg flex flex-col gap-4;
 }
-/* Product data */
-.product_list{
-  @apply w-full h-auto  border-b-[1px] border-neutral-600 pb-4 flex flex-col lg:flex-row items-center justify-between text-neutral-50
+
+/* Product Data */
+.product_list {
+  @apply w-full h-auto border-b-[1px] border-neutral-600 pb-4 flex flex-col lg:flex-row items-center justify-between text-neutral-50;
 }

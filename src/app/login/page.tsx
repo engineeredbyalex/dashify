@@ -25,7 +25,7 @@ export default function Login() {
   };
 
   return (
-    <section className="page">
+    <section className="h-screen w-screen flex items-center justify-center">
       <form className="card" onSubmit={handleSubmit}>
         <h3 className="text-neutral-50">Login to your account</h3>
         <div className="flex flex-col gap-4">
@@ -39,14 +39,14 @@ export default function Login() {
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="w-full flex justify-between">
+          <div className="w-full gap-4 flex flex-col justify-between">
+            <button className="button_primary">Login </button>
             <Link href={"/register"}>
               <button className="button_outline">Create a account</button>
             </Link>
-            <button className="button_primary">Login </button>
           </div>
           <div className="w-full flex flex-col items-center justify-center">
-            <button className="button_link">Login as a guest</button>
+            {/* <button className="button_link">Login as a guest</button> */}
             {error && <div className="text-neutral-50 text-sm">{error}</div>}
           </div>
         </div>

@@ -7,13 +7,12 @@ export async function GET(req: Request) {
   await connectDB();
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
-  console.log("Fetching product with ID:", id);
 
   try {
     if (id) {
+      // Fetch a single product by ID
       const product = await Product.findById(id);
       if (!product) {
-        console.log("Product not found.");
         return NextResponse.json(
           { error: "Product not found." },
           { status: 404 }
@@ -21,11 +20,12 @@ export async function GET(req: Request) {
       }
       return NextResponse.json(product);
     } else {
+      // Fetch all products
       const products = await Product.find({});
       return NextResponse.json(products);
     }
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching products:", error);
     return NextResponse.json(
       { error: "Failed to fetch products." },
       { status: 500 }
@@ -60,6 +60,32 @@ export async function DELETE(req: Request) {
     console.log(error);
     return NextResponse.json(
       { error: "Failed to delete product." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(req: Request) {
+  await connectDB();
+  const { pathname } = new URL(req.url);
+  const id = pathname.split("/").pop(); // Extract the ID from the URL path
+  const body = await req.json();
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+    if (!updatedProduct) {
+      return NextResponse.json(
+        { error: "Product not found." },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json(updatedProduct);
+  } catch (error) {
+    console.error("Error updating product:", error);
+    return NextResponse.json(
+      { error: "Failed to update product." },
       { status: 500 }
     );
   }

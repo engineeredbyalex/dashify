@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { storage } from "@/app/lib/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Image from "next/image";
 import PageHeader from "../ui/PageHeader";
 
 interface ProductFormProps {
@@ -100,11 +101,13 @@ export default function ProductForm({ initialData }: ProductFormProps) {
 
   return (
     <div className="mt-8 w-full flex flex-col items-start ">
+      <div>
         <PageHeader>
-          {/* <button type="submit" className="button_primary">
+          <button type="submit" className="button_primary">
             {initialData ? "Save Product" : "Create Product"}
-          </button> */}
+          </button>
         </PageHeader>
+      </div>
       <form
         onSubmit={handleSubmit}
         className="gap-8 mt-8 flex flex-row-reverse"
@@ -249,12 +252,14 @@ export default function ProductForm({ initialData }: ProductFormProps) {
   );
 }
 
+
+
 // <h3 className="text-neutral-50 mt-9">
-//   {initialData ? "Edit Product" : "Create Product"}
-// </h3>;
-// {
-//   error && <div className="text-red-500">{error}</div>;
-// }
-// {
-//   /* Image Upload */
-// }
+      //   {initialData ? "Edit Product" : "Create Product"}
+      // </h3>;
+      // {
+      //   error && <div className="text-red-500">{error}</div>;
+      // }
+      // {
+      //   /* Image Upload */
+      // }
