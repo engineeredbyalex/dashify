@@ -76,13 +76,13 @@ export default function CityStats() {
   return (
     <div className="stat_card text-neutral-50">
       <div className="flex flex-col">
-        <h3 className="text-neutral-50 font-semibold">Overview of cities</h3>
+        <h3 className="text-neutral-50 font-semibold">Overview Of Cities</h3>
         <h5 className="text-neutral-600">
           This is your overview of the most popular cities.
         </h5>
       </div>
       <div className="flex flex-col gap-2">
-        <div className="flex flex-row">
+        <div className="flex flex-col lg:flex-row">
           {cityStats.map(({ city }, index) => (
             <div
               key={city}

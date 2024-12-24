@@ -98,7 +98,7 @@ export default function CategoryStats() {
         </h5>
       </div>
       <div className="flex flex-col gap-2 mt-4">
-        <div className="flex flex-row">
+        <div className="flex flex-col lg:flex-row">
           {categoryStats.map(({ categoryName }, index) => (
             <div
               key={categoryName}
