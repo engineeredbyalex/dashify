@@ -77,9 +77,9 @@ export default function CityStats() {
     <div className="stat_card text-neutral-50">
       <div className="flex flex-col">
         <h3 className="text-neutral-50 font-semibold">Overview Of Cities</h3>
-        <h5 className="text-neutral-600">
+        <h6 className="text-neutral-600">
           This is your overview of the most popular cities.
-        </h5>
+        </h6>
       </div>
       <div className="flex flex-col gap-2">
         <div className="flex flex-col lg:flex-row">

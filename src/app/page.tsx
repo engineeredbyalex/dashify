@@ -29,7 +29,7 @@ function Home() {
       {/* Header Section */}
       <Header />
       {/* Page Header */}
-      <div className="px-4 lg:mx-28 mt-8 w-full">
+      <div className="px-4 lg:mx-28 mt-8">
         <PageHeader>
           <Button
             route="statistics/export"

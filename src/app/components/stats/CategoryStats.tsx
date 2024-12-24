@@ -93,9 +93,9 @@ export default function CategoryStats() {
         <h3 className="text-neutral-50 font-semibold">
           Top Product Categories
         </h3>
-        <h5 className="text-neutral-600">
+        <h6 className="text-neutral-600">
           This is your overview of the most popular categories.
-        </h5>
+        </h6>
       </div>
       <div className="flex flex-col gap-2 mt-4">
         <div className="flex flex-col lg:flex-row">

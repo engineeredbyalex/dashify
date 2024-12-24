@@ -67,7 +67,7 @@ export default function RecentSales() {
   return (
     <div className="w-full bg-neutral-950 px-6 py-6 rounded-lg border-[1px] border-neutral-800">
       <h3 className="text-neutral-50">Recent sales</h3>
-      <h5 className="text-neutral-600">You made {orders.length} sales.</h5>
+      <h6 className="text-neutral-600">You made {orders.length} sales.</h6>
       <div className="gap-4 flex flex-col lg:grid grid-cols-3 mt-4">
         {orders.slice(0, 7).map((order) => (
           <div
@@ -77,7 +77,7 @@ export default function RecentSales() {
             <div className="flex flex-row items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-white"></div>
               <div className="flex flex-col">
-                <p className="text-neutral-400">Order Id : {order._id}</p>
+                {/* <p className="text-neutral-400">Order Id : {order._id}</p> */}
                 <h5 className=" text-neutral-50">{order.name}</h5>
                 <h6 className="text-neutral-400">{order.email}</h6>
               </div>

@@ -121,7 +121,7 @@ export default function YearlyOverview() {
   return (
     <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
       <h2 className="text-neutral-50 text-xl font-semibold">Overview</h2>
-      <h5 className="text-neutral-600">This is your yearly Overview.</h5>
+      <h6 className="text-neutral-600">This is your yearly Overview.</h6>
       <Line data={data} options={chartOptions} />
     </div>
   );
