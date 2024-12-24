@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 import Loader from "../ui/Loader";
 import { HiStar } from "react-icons/hi2";
 import { HiCurrencyDollar } from "react-icons/hi2";
+import Image from "next/image";
 
 interface Product {
   _id: string;
@@ -100,7 +101,11 @@ export default function ProductList() {
               <div className="w-full flex gap-4">
                 {/* Product Image */}
                 <div className="w-14 h-14 lg:w-16 lg:h-16">
-                  <img src={product.images[0]} className="rounded-lg" />
+                  <Image
+                    src={product.images[0]}
+                    alt={`Image of ${product.title}`}
+                    className="rounded-lg"
+                  />
                 </div>
                 {/* Product Image */}
                 {/* Produtct Info */}

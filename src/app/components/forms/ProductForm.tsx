@@ -6,6 +6,7 @@ import axios from "axios";
 import { storage } from "@/app/lib/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import PageHeader from "../ui/PageHeader";
+import Image from "next/image";
 
 interface ProductFormProps {
   initialData?: {
@@ -31,7 +32,6 @@ export default function ProductForm({ initialData }: ProductFormProps) {
   const [imagePreviews, setImagePreviews] = useState<string[]>(
     initialData?.images || []
   );
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
@@ -77,7 +77,6 @@ export default function ProductForm({ initialData }: ProductFormProps) {
       router.push("/products");
     } catch (error) {
       console.log(error);
-      setError("Failed to save product.");
     }
   };
 
@@ -101,9 +100,9 @@ export default function ProductForm({ initialData }: ProductFormProps) {
   return (
     <div className="mt-8 w-full flex flex-col items-start ">
       <PageHeader>
-        {/* <button type="submit" className="button_primary">
-            {initialData ? "Save Product" : "Create Product"}
-          </button> */}
+        <button type="submit" className="button_primary">
+          {initialData ? "Save Product" : "Create Product"}
+        </button>
       </PageHeader>
       <form
         onSubmit={handleSubmit}
@@ -143,78 +142,25 @@ export default function ProductForm({ initialData }: ProductFormProps) {
               type="text"
               name="subcategory"
               placeholder="Product sub category"
+              onChange={(e) => setPrice(Number(e.target.value))}
             />
           </div>
           <div className="flex flex-col gap-1">
             <label>Product code</label>
-            <input type="text" name="code" placeholder="Product code" />
+            <input
+              type="text"
+              name="code"
+              placeholder="Product code"
+              onChange={(e) => setStock(Number(e.target.value))}
+            />
           </div>
         </div>
-        <div className="gap-4 w-full flex flex-col">
-          <div className="flex flex-col gap-1">
-            <label>Product name</label>
-            <input type="text" name="title" placeholder="Product name" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product description</label>
-            <input
-              type="text"
-              name="description"
-              placeholder="Product description"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product category</label>
-            <input type="text" name="category" placeholder="Product category" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product sub category</label>
-            <input
-              type="text"
-              name="subcategory"
-              placeholder="Product sub category"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product code</label>
-            <input type="text" name="code" placeholder="Product code" />
-          </div>
-        </div>
-        <div className="gap-4 w-full flex flex-col">
-          <div className="flex flex-col gap-1">
-            <label>Product name</label>
-            <input type="text" name="title" placeholder="Product name" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product description</label>
-            <input
-              type="text"
-              name="description"
-              placeholder="Product description"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product category</label>
-            <input type="text" name="category" placeholder="Product category" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product sub category</label>
-            <input
-              type="text"
-              name="subcategory"
-              placeholder="Product sub category"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product code</label>
-            <input type="text" name="code" placeholder="Product code" />
-          </div>
-        </div>
+
         <div className="w-full flex flex-col gap-4">
           {imagePreviews.length > 0 && (
             <div className="flex flex-col gap-2">
               <div className="w-full h-full">
-                <img
+                <Image
                   key={0}
                   src={imagePreviews[0]}
                   alt={`Preview 0`}
@@ -232,7 +178,7 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                     onDragOver={handleDragOver}
                     onDrop={() => handleDrop(index + 1)}
                   >
-                    <img
+                    <Image
                       src={preview}
                       alt={`Preview ${index + 1}`}
                       width={64}
