@@ -185,9 +185,9 @@ export default function ProductList() {
         >
           <h6>Prev</h6>
         </button>
-        <p className="text-neutral-500">
+        <h6 className="text-neutral-500">
           Page {currentPage} of {totalPages}
-        </p>
+        </h6>
         <button
           className="w-9 h-9 px-10 bg-blue-600 rounded-lg text-neutral-50"
           onClick={() => handlePageChange("next")}
