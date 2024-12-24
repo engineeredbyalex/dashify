@@ -100,16 +100,57 @@ export default function ProductForm({ initialData }: ProductFormProps) {
 
   return (
     <div className="mt-8 w-full flex flex-col items-start ">
-        <PageHeader>
-          {/* <button type="submit" className="button_primary">
+      <PageHeader>
+        {/* <button type="submit" className="button_primary">
             {initialData ? "Save Product" : "Create Product"}
           </button> */}
-        </PageHeader>
+      </PageHeader>
       <form
         onSubmit={handleSubmit}
-        className="gap-8 mt-8 flex flex-row-reverse"
+        className="w-full gap-8 mt-8 flex flex-col-reverse"
       >
-        <div className="gap-4 w-1/4 flex flex-col">
+        <div className="gap-4 w-full flex flex-col">
+          <div className="flex flex-col gap-1">
+            <label>Product name</label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Product name"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label>Product description</label>
+            <input
+              type="text"
+              name="description"
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Product description"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label>Product category</label>
+            <input
+              type="text"
+              name="category"
+              placeholder="Product category"
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label>Product sub category</label>
+            <input
+              type="text"
+              name="subcategory"
+              placeholder="Product sub category"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label>Product code</label>
+            <input type="text" name="code" placeholder="Product code" />
+          </div>
+        </div>
+        <div className="gap-4 w-full flex flex-col">
           <div className="flex flex-col gap-1">
             <label>Product name</label>
             <input type="text" name="title" placeholder="Product name" />
@@ -139,7 +180,7 @@ export default function ProductForm({ initialData }: ProductFormProps) {
             <input type="text" name="code" placeholder="Product code" />
           </div>
         </div>
-        <div className="gap-4 w-1/4 flex flex-col">
+        <div className="gap-4 w-full flex flex-col">
           <div className="flex flex-col gap-1">
             <label>Product name</label>
             <input type="text" name="title" placeholder="Product name" />
@@ -169,37 +210,7 @@ export default function ProductForm({ initialData }: ProductFormProps) {
             <input type="text" name="code" placeholder="Product code" />
           </div>
         </div>
-        <div className="gap-4 w-1/4 flex flex-col">
-          <div className="flex flex-col gap-1">
-            <label>Product name</label>
-            <input type="text" name="title" placeholder="Product name" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product description</label>
-            <input
-              type="text"
-              name="description"
-              placeholder="Product description"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product category</label>
-            <input type="text" name="category" placeholder="Product category" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product sub category</label>
-            <input
-              type="text"
-              name="subcategory"
-              placeholder="Product sub category"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label>Product code</label>
-            <input type="text" name="code" placeholder="Product code" />
-          </div>
-        </div>
-        <div className="w-1/4 flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-4">
           {imagePreviews.length > 0 && (
             <div className="flex flex-col gap-2">
               <div className="w-full h-full">
