@@ -102,6 +102,8 @@ export default function ProductList() {
                 {/* Product Image */}
                 <div className="w-14 h-14 lg:w-16 lg:h-16">
                   <Image
+                    width={64}
+                    height={64}
                     src={product.images[0]}
                     alt={`Image of ${product.title}`}
                     className="rounded-lg"
@@ -120,10 +122,14 @@ export default function ProductList() {
                       <div className="w-3 h-3 bg-green-600 rounded-full"></div>
                       <h6>{product.price.toFixed(2)} RON</h6>
                     </div>
-                    <div className="flex gap-1 items-center">
-                      <HiStar className="fill-yellow-500" size={20} />
-                      <h6>Reviews : {product.reviews}</h6>
-                    </div>
+                    {!product.reviews ? (
+                      <div className="flex gap-1 items-center">
+                        <HiStar className="fill-yellow-500" size={20} />
+                        <h6>Reviews : {product.reviews}</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
                 {/* Produtct Info */}
@@ -137,18 +143,30 @@ export default function ProductList() {
                   />
                 </div>
                 <div className="w-full flex flex-row justify-between mt-4">
-                  <div className="flex gap-1">
-                    <HiStar className="fill-yellow-500" size={20} />
-                    <h6>{product.views} views</h6>
-                  </div>
-                  <div className="flex gap-1">
-                    <HiStar className="fill-yellow-500" size={20} />
-                    <h6>{product.orders} orders</h6>
-                  </div>
-                  <div className="flex gap-1">
-                    <HiStar className="fill-yellow-500" size={20} />
-                    <h6>{product.saves} saves</h6>
-                  </div>
+                  {!product.views ? (
+                    <div className="flex gap-1">
+                      <HiStar className="fill-yellow-500" size={20} />
+                      <h6>{product.views} views</h6>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {!product.orders ? (
+                    <div className="flex gap-1">
+                      <HiStar className="fill-yellow-500" size={20} />
+                      <h6>{product.orders} orders</h6>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {!product.saves ? (
+                    <div className="flex gap-1">
+                      <HiStar className="fill-yellow-500" size={20} />
+                      <h6>{product.saves} saves</h6>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
@@ -161,18 +179,22 @@ export default function ProductList() {
       {/* Pagination controls */}
       <div className="flex flex-row justify-between items-center mt-4">
         <button
-          className="w-9 h-9 bg-blue-600 rounded-lg"
+          className="w-9 h-9 px-10 bg-blue-600 rounded-lg text-neutral-50"
           onClick={() => handlePageChange("prev")}
           disabled={currentPage === 1}
-        />
+        >
+          <h6>Prev</h6>
+        </button>
         <p className="text-neutral-500">
           Page {currentPage} of {totalPages}
         </p>
         <button
-          className="w-9 h-9 bg-blue-600 rounded-lg"
+          className="w-9 h-9 px-10 bg-blue-600 rounded-lg text-neutral-50"
           onClick={() => handlePageChange("next")}
           disabled={currentPage === totalPages}
-        />
+        >
+          <h6>Next</h6>
+        </button>
       </div>
     </div>
   );
