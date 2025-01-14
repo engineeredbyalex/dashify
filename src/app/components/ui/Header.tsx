@@ -5,11 +5,11 @@ import Link from "next/link";
 // with the current link
 import { usePathname } from "next/navigation";
 // importing UserCard for the user sign out and other functions
-import UserCard from "./UserCard";
+import UserCard from "./user-card";
 // importing icons
 import { HiBars3 } from "react-icons/hi2";
 import { useState } from "react";
-import SearchInput from "./SearchInput";
+import SearchInput from "./search-input";
 
 export default function Header() {
   const [toggle, setToggle] = useState(false);

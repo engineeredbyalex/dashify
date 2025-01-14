@@ -1,9 +1,9 @@
 "use client";
 
 /* Components */
-import PageHeader from "./components/ui/PageHeader";
-import Button from "./components/ui/Button";
-import Header from "./components/ui/Header";
+import PageHeader from "./components/ui/page-header";
+import Button from "./components/ui/button";
+import Header from "./components/ui/header";
 
 /* Hooks */
 import useAuth from "./hooks/useAuth";
@@ -19,13 +19,14 @@ import RecentSales from "./components/stats/RecentSalesStats";
 
 /* Graph Components */
 import YearlyOverview from "./components/graphs/YearlyOverview";
+import TopSalesStats from "./components/stats/TopProductsStats";
 
 function Home() {
   /* Authentication Hook */
   useAuth();
 
   return (
-    <div>
+    <div className="min-h-screen">
       {/* Header Section */}
       <Header />
       {/* Page Header */}
@@ -44,22 +45,20 @@ function Home() {
         <div className="gap-4 grid grid-cols-2 lg:flex">
           <RevenueStats />
           <OrderStats />
-          <RevenueStats />
           <ClientsStats />
           <UserStats />
         </div>
         {/* Yearly Overview and Stats */}
-        <div className="h-auto gap-8 flex flex-col lg:grid grid-cols-2">
-          <div className="h-auto">
-            <YearlyOverview />
-          </div>
-          <div className="h-auto gap-4 lg:gap-4 flex flex-col justify-between lg:justify-start">
+        <div className="gap-8 flex flex-col lg:grid grid-cols-2">
+          <YearlyOverview />
+          <div className="gap-4 flex flex-col justify-between lg:justify-start">
             <CityStats />
             <CategoryStats />
           </div>
         </div>
         {/* Recent Sales */}
         <RecentSales />
+        <TopSalesStats />
       </div>
     </div>
   );

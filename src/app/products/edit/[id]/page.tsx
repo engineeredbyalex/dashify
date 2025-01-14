@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
-import ProductForm from "@/app/components/forms/ProductForm";
-import Header from "@/app/components/ui/Header";
+import ProductForm from "@/app/components/forms/ProductForm/ProductForm";
+import Header from "@/app/components/ui/header";
 
 export default function EditProductPage() {
   const [productInfo, setProductInfo] = useState(null);

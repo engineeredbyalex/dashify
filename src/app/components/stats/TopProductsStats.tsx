@@ -1,69 +1,57 @@
 "use client";
-
+// Import necessary modules and components
+import { useState, useEffect } from "react";
+// Importing axios
 import axios from "axios";
-import { useEffect, useState } from "react";
+// Importing Image module
 import Image from "next/image";
+// Importing icons 
+import { HiStar, HiTruck, HiHeart } from "react-icons/hi2";
 
+// TopSalesStats component displays the most popular products based on sales
 export default function TopSalesStats() {
-  interface LineItem {
-    productId: string;
-    quantity: number;
-  }
-
+  // Defining the Order Interface
   interface Order {
     _id: string;
-    line_items: LineItem[];
+    name: string;
+    email: string;
+    line_items: { productId: string; quantity: number }[];
   }
 
-  interface Product {
-    _id: string;
-    title: string;
-    price: number;
-    images: string[];
-  }
+  // State variables to manage orders, products, and top products
+ const [orders, setOrders] = useState<Order[]>([]);
+  const [products, setProducts] = useState([]);
+  const [topProducts, setTopProducts] = useState([]);
 
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [topProducts, setTopProducts] = useState<
-    { productId: string; count: number }[]
-  >([]);
-  const productsPerPage = 3;
+  // Number of products to display per page
+  const productsPerPage = 7;
 
-  // Fetch orders and products data
+  // Fetch orders and products data from the API
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get<Order[]>("/api/orders/orders");
-        setOrders(response.data);
+        const [ordersResponse, productsResponse] = await Promise.all([
+          axios.get("/api/orders/"),
+          axios.get("/api/products/"),
+        ]);
+        setOrders(ordersResponse.data);
+        setProducts(productsResponse.data);
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get<Product[]>("/api/products/products");
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchOrders();
-    fetchProducts();
+    fetchData();
   }, []);
 
-  // Calculate the count of products sold
+  // Calculate top products based on order quantities
   useEffect(() => {
-    if (orders.length > 0) {
-      const productCounts: Record<string, number> = {};
+    const calculateTopProducts = () => {
+      const productCounts = {};
 
       orders.forEach((order) => {
-        order.line_items.forEach((item) => {
-          const { productId } = item;
-          if (productId) {
-            productCounts[productId] = (productCounts[productId] || 0) + 1;
-          }
+        order.line_items.forEach(({ productId, quantity }) => {
+          productCounts[productId] = (productCounts[productId] || 0) + quantity;
         });
       });
 
@@ -72,48 +60,57 @@ export default function TopSalesStats() {
         .sort((a, b) => b.count - a.count);
 
       setTopProducts(sortedCounts);
-    }
+    };
+
+    if (orders.length) calculateTopProducts();
   }, [orders]);
 
-  // Get products for the first page (since pagination is not fully implemented)
+  // Slice the top products for the current page
   const currentProducts = topProducts.slice(0, productsPerPage);
 
   return (
-    <div className="w-full bg-zinc-900 px-4 py-4 rounded-lg flex flex-col gap-6">
-      <div className="flex flex-col">
-        <h2 className="font-title font-medium text-zinc-100">Top Products</h2>
-        <p className="font-body text-zinc-300">
-          These are the top-selling products based on the number of orders.
-        </p>
-      </div>
-      <div className="gap-6 flex flex-col">
+    <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
+      <h2 className="text-neutral-50 font-semibold">Top product sales</h2>
+      <h6 className="text-neutral-600 mb-4">
+        These are the most popular products based on orders.
+      </h6>
+      <div className="gap-6 flex flex-col lg:grid grid-cols-2">
         {currentProducts.map(({ productId, count }) => {
           const product = products.find((p) => p._id === productId);
-
           if (!product) return null;
 
           return (
-            <div className="flex gap-3" key={productId}>
+            <div
+              className="py-3 px-3 gap-3 border-b-[1px] border-neutral-800 flex flex-col lg:flex-row"
+              key={productId}
+            >
               {product.images?.length > 0 && (
                 <Image
                   src={product.images[0]}
                   alt={product.title || "Product Image"}
-                  width={64}
-                  height={64}
+                  width={56}
+                  height={56}
                   className="object-cover rounded-lg"
                 />
               )}
-              <div className="flex flex-col">
-                <h4 className="text-zinc-300 font-medium">
+              <div className="gap-2 flex flex-col">
+                <h4 className="text-neutral-50">
                   {product.title || "Unknown"}
                 </h4>
-                <h5 className="text-zinc-400">Total Sales: {count}</h5>
-                <p className="text-zinc-400">
-                  Price:{" "}
-                  {product.price
-                    ? `${product.price.toFixed(2)} RON`
-                    : "Unknown"}
-                </p>
+                <div className="gap-2 lg:gap-4 text-neutral-50 flex flex-col lg:flex-row">
+                  <div className="gap-1 text-neutral-200 font-base flex flex-row items-center">
+                    <HiTruck size={16} className="fill-green-600" />
+                    Total orders: {count}
+                  </div>
+                  <div className="gap-1 text-neutral-200 font-base flex flex-row items-center">
+                    <HiStar size={16} className="fill-yellow-500" />
+                    Rating: {count}
+                  </div>
+                  <div className="gap-1 text-neutral-200 font-base flex flex-row items-center">
+                    <HiHeart size={16} className="fill-red-500" />
+                    Total saves: {count}
+                  </div>
+                </div>
               </div>
             </div>
           );

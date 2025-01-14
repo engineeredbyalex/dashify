@@ -22,7 +22,7 @@ export default function Breadcrumbs() {
 
   return (
     <div className="flex gap-2">
-      <p>{getCleanedPathname()}</p>
+      <p className="text-neutral-600 truncate">{getCleanedPathname()}</p>
     </div>
   );
 }

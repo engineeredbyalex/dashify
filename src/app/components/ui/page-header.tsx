@@ -1,6 +1,6 @@
 "use client";
 
-import BreadCrumbs from "./Breadcrumbs";
+import BreadCrumbs from "./breadcrumb";
 import { usePathname } from "next/navigation";
 
 // Define a type for the props
@@ -25,14 +25,12 @@ export default function PageHeader({ children }: PageHeaderProps) {
   };
 
   return (
-    <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between gap-4">
-      <div className="text-neutral-50 w-full lg:w-2/3">
+    <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between  truncate">
+      <div className="text-neutral-50 w-full lg:w-1/2 flex flex-col items-start justify-center">
         <h1>{getCleanedPathname()}</h1>
-        <div>
-          <BreadCrumbs />
-        </div>
+        <BreadCrumbs />
       </div>
-      <div className="w-full gap-2 flex flex-col lg:flex-row justify-between lg:justify-end">
+      <div className=" w-full lg:w-1/2 gap-4 mt-4 flex flex-row items-center justify-between lg:justify-end">
         {children}
       </div>
     </div>

@@ -1,5 +1,5 @@
-import ProductForm from "@/app/components/forms/ProductForm";
-import Header from "@/app/components/ui/Header";
+import ProductForm from "@/app/components/forms/ProductForm/ProductForm";
+import Header from "@/app/components/ui/header";
 
 export default function ProductNew() {
   return (

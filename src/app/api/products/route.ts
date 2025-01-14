@@ -1,8 +1,10 @@
-// src/pages/api/products/route.ts
 import { connectDB } from "@/app/lib/mongodb";
 import { Product } from "@/app/models/Products";
 import { NextResponse } from "next/server";
 
+/**
+ * GET - Fetch all products or a specific product by ID if provided.
+ */
 export async function GET(req: Request) {
   await connectDB();
   const { searchParams } = new URL(req.url);
@@ -10,7 +12,6 @@ export async function GET(req: Request) {
 
   try {
     if (id) {
-      // Fetch a single product by ID
       const product = await Product.findById(id);
       if (!product) {
         return NextResponse.json(
@@ -20,7 +21,6 @@ export async function GET(req: Request) {
       }
       return NextResponse.json(product);
     } else {
-      // Fetch all products
       const products = await Product.find({});
       return NextResponse.json(products);
     }
@@ -33,6 +33,9 @@ export async function GET(req: Request) {
   }
 }
 
+/**
+ * POST - Create a new product.
+ */
 export async function POST(req: Request) {
   await connectDB();
   try {
@@ -41,7 +44,7 @@ export async function POST(req: Request) {
     await product.save();
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
-    console.log(error);
+    console.error("Error creating product:", error);
     return NextResponse.json(
       { error: "Failed to create product." },
       { status: 500 }
@@ -49,43 +52,27 @@ export async function POST(req: Request) {
   }
 }
 
+/**
+ * DELETE - Delete a product by ID.
+ */
 export async function DELETE(req: Request) {
-  await connectDB();
-  try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-    await Product.findByIdAndDelete(id);
-    return NextResponse.json(null, { status: 204 });
-  } catch (error) {
-    console.log(error);
+  const { searchParams } = new URL(req.url);
+  const productId = searchParams.get("id");
+
+  if (!productId) {
     return NextResponse.json(
-      { error: "Failed to delete product." },
-      { status: 500 }
+      { error: "Product ID is required" },
+      { status: 400 }
     );
   }
-}
-
-export async function PUT(req: Request) {
-  await connectDB();
-  const { pathname } = new URL(req.url);
-  const id = pathname.split("/").pop(); // Extract the ID from the URL path
-  const body = await req.json();
 
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(id, body, {
-      new: true,
-    });
-    if (!updatedProduct) {
-      return NextResponse.json(
-        { error: "Product not found." },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json(updatedProduct);
+    await Product.findByIdAndDelete(productId);
+    return new NextResponse(null, { status: 204 });
   } catch (error) {
-    console.error("Error updating product:", error);
+    console.error("Error deleting product:", error);
     return NextResponse.json(
-      { error: "Failed to update product." },
+      { error: "Failed to delete product" },
       { status: 500 }
     );
   }

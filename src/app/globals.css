@@ -35,7 +35,6 @@ p {
 .animation {
   @apply transition-all ease-in-out duration-300;
 }
-
 /* Components */
 /* Navigation Bar */
 .navigation_bar {
@@ -64,12 +63,27 @@ label {
   @apply text-sm leading-[22px] text-neutral-50;
 }
 input {
-  @apply min-w-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 text-xs leading-[20px] text-neutral-500 animation;
+  @apply w-full lg:min-w-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 text-sm leading-[20px] text-neutral-600 animation;
+  }
+  
+  textarea {
+    @apply w-full lg:min-w-64 min-h-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 text-sm leading-[20px] text-neutral-600 animation;
+  }
+  
+  select {
+    @apply w-full lg:min-w-64 px-3 py-1 border border-neutral-800 rounded-lg bg-neutral-950 text-sm leading-[20px] text-neutral-600 animation;
 }
 input:hover {
   @apply border-neutral-600 text-neutral-300;
 }
 input:active {
+  @apply border-neutral-400 text-neutral-50;
+}
+select:hover {
+  @apply border-neutral-600 text-neutral-300;
+}
+
+select:active {
   @apply border-neutral-400 text-neutral-50;
 }
 input::file-selector-button {
@@ -78,13 +92,21 @@ input::file-selector-button {
 
 /* Buttons */
 button {
-  @apply w-full h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg flex flex-row items-center justify-center animation text-sm;
+  @apply w-full lg:w-auto h-8 px-3 md:px-4 lg:px-8 py-4 rounded-lg text-sm flex flex-row items-center justify-center animation;
 }
 .button_primary {
   @apply text-neutral-950 bg-neutral-50 border-[1px] border-neutral-50;
 }
 .button_primary:hover {
   @apply text-neutral-950 bg-neutral-200;
+}
+.button_secondary {
+  @apply text-neutral-50 bg-neutral-800 border-[1px] border-neutral-800;
+}
+
+.button_secondary:hover {
+  @apply text-neutral-50 bg-neutral-900 border-neutral-900;
+  ;
 }
 .button_outline {
   @apply border-[1px] border-neutral-50 text-neutral-50;
@@ -98,10 +120,10 @@ button {
 .button_destructive:hover {
   @apply bg-red-700 border-[1px] border-red-700 text-neutral-50 animation;
 }
-.button_postive {
+.button_positive {
   @apply bg-green-600 border-[1px] border-green-600 text-neutral-50 animation;
 }
-.button_postive:hover {
+.button_positive:hover {
   @apply bg-green-700 border-[1px] border-green-700 text-neutral-50 animation;
 }
 .button_link {

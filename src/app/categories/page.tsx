@@ -1,24 +1,22 @@
 import PageHeader from "../components/ui/page-header";
 import Header from "../components/ui/header";
 import Button from "../components/ui/button";
-import OrderList from "../components/lists/OrdersList";
+import CategoryList from "../components/lists/CategoryList";
 
-export default function Orders() {
+export default function Categories() {
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
       <div className="px-4 lg:mx-28 py-9">
         <PageHeader>
-          <Button route="/products" text="Change view" style="button_outline" />
-
           <Button
-            route="products/new"
-            text="Create a new product"
-            style="button_primary"
+            route="categories/new"
+            text="Create a new category"
+            style="button_positive"
           />
         </PageHeader>
         <div className="mt-9">
-          <OrderList />
+          <CategoryList />
         </div>
       </div>
     </div>

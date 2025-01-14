@@ -105,23 +105,23 @@ export default function YearlyOverview() {
         beginAtZero: true,
         ticks: {
           callback: (tickValue: string | number) =>
-            `${tickValue.toLocaleString()} $`,
-          color: "#A3A3A3",
+            `${tickValue.toLocaleString()}`,
+          color: "#525252",
         },
-        grid: { color: "#1F2937" },
+        grid: { color: "transparent" },
       },
       x: {
         type: "category" as const,
-        ticks: { color: "#A3A3A3" },
+        ticks: { color: "#525252" },
         grid: { display: false },
       },
     },
   };
 
   return (
-    <div className="w-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
-      <h2 className="text-neutral-50 text-xl font-semibold">Overview</h2>
-      <h6 className="text-neutral-600">This is your yearly Overview.</h6>
+    <div className="w-full h-full bg-neutral-950 p-6 rounded-lg border-[1px] border-neutral-800">
+      <h2 className="text-neutral-50  font-semibold">Overview</h2>
+      <h6 className="text-neutral-600 mb-4">This is your yearly Overview.</h6>
       <Line data={data} options={chartOptions} />
     </div>
   );

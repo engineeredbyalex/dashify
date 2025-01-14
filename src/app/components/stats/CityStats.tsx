@@ -74,7 +74,7 @@ export default function CityStats() {
     topCitiesTotal > 0 ? (count / topCitiesTotal) * 100 : 0;
 
   return (
-    <div className="stat_card text-neutral-50">
+    <div className="stat_card">
       <div className="flex flex-col">
         <h3 className="text-neutral-50 font-semibold">Overview Of Cities</h3>
         <h6 className="text-neutral-600">
@@ -86,12 +86,12 @@ export default function CityStats() {
           {cityStats.map(({ city }, index) => (
             <div
               key={city}
-              className="w-full justify-start items-center flex flex-row"
+              className="w-full justify-start items-center flex flex-row text-neutral-50"
             >
               <span className="w-full flex items-center justify-start gap-1">
                 <div
                   key={city}
-                  className={`w-3 h-3 rounded-full ${
+                  className={`w-3 h-3 rounded-full  ${
                     index === 0
                       ? "bg-blue-600"
                       : index === 1
